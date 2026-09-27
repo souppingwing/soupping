@@ -1,4 +1,4 @@
-<!-- 成长小星球 · 待办奖惩系统 · 版本 v48（改前备份于 _backup/） -->
+<!-- 成长小星球 · 待办奖惩系统 · 版本 v62（改前备份于 _backup/） -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -513,6 +513,51 @@ body{
 
 /* ===== 统计二级页 ===== */
 .stats-entry-row{margin-top:12px;position:relative}
+.learn-top{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#8A7F6B;margin-bottom:10px}
+.learn-type-tag{background:#FFF4D6;color:#B07A10;font-weight:800;font-size:12px;padding:3px 10px;border-radius:999px}
+.learn-q{font-size:24px;margin:4px 0 16px;text-align:center;letter-spacing:1px;font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC',system-ui,sans-serif;font-weight:800;color:var(--ink)}
+.learn-q .py-note{font-size:16px;color:#7A6B52;font-weight:700;margin-top:8px;display:block;line-height:1.8;font-family:'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',system-ui,sans-serif;letter-spacing:.5px}
+.learn-opt{display:block;width:100%;text-align:left;background:#FFFDF7;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font-size:16px;margin-bottom:8px;cursor:pointer;font-family:'PingFang SC','Segoe UI','Microsoft YaHei','Noto Sans SC',system-ui,sans-serif;font-weight:700;color:#3A3226;transition:border-color .12s,background .12s}
+.learn-opt:hover{border-color:var(--star)}
+.learn-opt.on{border-color:var(--star);background:#FFF4D6;font-weight:700}
+.learn-nav{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.learn-nav .btn{flex:1;min-width:120px}
+.result-score{text-align:center;padding:12px 0 6px}
+.result-score b{font-size:36px;color:var(--star)}
+.result-score .pct{font-size:15px;color:#8A7F6B;margin-left:8px}
+.result-stars{font-size:20px;letter-spacing:4px;margin-top:4px}
+.review-item{border-bottom:1px dashed var(--line);padding:10px 2px;font-size:15px;line-height:1.7;font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC','Segoe UI',system-ui,sans-serif}
+.review-item .rv-q{color:#3A3226;font-weight:700}
+.review-item .rv-ok{color:#2E8B57;font-weight:700}
+.review-item .rv-no{color:#D9534F;font-weight:700}
+.review-item .rv-correct{color:#2E8B57}
+/* ===== 分数趋势（v54） ===== */
+.ls-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:8px;margin-bottom:14px}
+.ls-card{background:#FFFDF7;border:1.5px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center}
+.ls-card b{display:block;font-size:20px;color:var(--star)}
+.ls-card span{font-size:12px;color:#8A7F6B}
+.chart-box{background:#FFFDF7;border:1.5px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px}
+.chart-box svg{width:100%;height:auto;display:block}
+.ls-empty{text-align:center;color:#B9AFA0;padding:22px 0;font-size:14px}
+.ls-list{background:#FFFDF7;border:1.5px solid var(--line);border-radius:12px;padding:4px 12px;margin-bottom:14px}
+.ls-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.ls-row:last-child{border-bottom:none}
+.ls-row .t{color:#8A7F6B;font-size:12.5px}
+.ls-row .s{font-weight:800;color:#3A3226}
+.ls-row .up{color:#2E8B57;font-weight:700}
+.ls-row .down{color:#D9534F;font-weight:700}
+.ls-row .flat{color:#B9AFA0}
+/* ===== 口算练习（v55） ===== */
+.math-types{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 14px}
+.math-types button{border:1.5px solid #E4D7C2;background:#FBF7ED;border-radius:10px;padding:9px 6px;font-size:13px;line-height:1.35;color:#6B5B45;cursor:pointer;font-weight:700;white-space:normal;word-break:keep-all;transition:all .12s}
+.math-types button.on{border-color:var(--star);background:#FFF4D6;color:#B07A10}
+.math-q{font-size:34px;text-align:center;margin:6px 0 2px;font-weight:800;letter-spacing:3px;font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC',system-ui,sans-serif}
+#mathInput{display:block;width:180px;margin:14px auto;padding:12px;font-size:26px;text-align:center;border:2px solid var(--line);border-radius:14px;background:#FFFDF6;color:var(--ink);outline:none;font-weight:800;font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC',system-ui,sans-serif}
+#mathInput:focus{border-color:var(--star)}
+#mathInput::-webkit-outer-spin-button,#mathInput::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+#mathInput{-moz-appearance:textfield}
+#mathInput::placeholder{color:#C9BCA8;font-size:16px;font-weight:600}
+@media(max-width:720px){.math-types{grid-template-columns:repeat(2,1fr)}}
 .stats-entry{border:none;background:rgba(255,255,255,.4);color:#7A4A10;font-weight:800;font-size:14px;padding:9px 18px;border-radius:999px;cursor:pointer;font-family:var(--font);transition:background .12s,transform .1s;box-shadow:var(--shadow-sm)}
 .stats-entry:hover{background:rgba(255,255,255,.65);transform:translateY(-1px)}
 .stats-page{display:flex;flex-direction:column;gap:16px;margin-top:20px}
@@ -609,6 +654,10 @@ body{
   /* v41m12：独立 tab 页不再需要返回按钮 */
   .stats-head{justify-content:center;text-align:center}
   .stats-head .btn-add{display:none}
+  /* v60：非独立 tab 的二级页保留返回按钮（需返回上一级） */
+  #learnStatsPage .stats-head .btn-add,
+  #mathPage .stats-head .btn-add,
+  #statsPage .stats-head .btn-add{display:inline-block}
   /* v41m14：设置独立页（modal 移入，避开弹窗层级自动提升） */
   #settingsPageBody .modal{width:100%;max-width:100%;max-height:none;box-shadow:none;border-radius:0;background:transparent;padding:4px 0 80px;animation:none}
   #settingsPageBody .modal h3{display:none}
@@ -802,6 +851,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     <div class="stats-entry-row">
       <button class="stats-entry" id="btnStats">查看趋势统计 →</button>
       <button class="stats-entry" id="btnTutor">补习课系统 →</button>
+      <button class="stats-entry" id="btnLearn">学习系统 →</button>
     </div>
   </header>
 
@@ -970,9 +1020,9 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 8.2a2.1 2.1 0 1 0 0-4.2 2.1 2.1 0 0 0 0 4.2zM12 7.4a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2zM17.5 8.2a2.1 2.1 0 1 0 0-4.2 2.1 2.1 0 0 0 0 4.2zM5.2 11.4c-1.6 0-2.7 1.1-2.7 2.7 0 1.9 1.3 3.3 2.7 3.3s2.7-1.4 2.7-3.3c0-1.6-1.1-2.7-2.7-2.7zM18.8 11.4c-1.6 0-2.7 1.1-2.7 2.7 0 1.9 1.3 3.3 2.7 3.3s2.7-1.4 2.7-3.3c0-1.6-1.1-2.7-2.7-2.7zM12 12.4c-2.6 0-4.7 1.9-4.7 4.7 0 2.8 2.1 4.6 4.7 4.6s4.7-1.8 4.7-4.6c0-2.8-2.1-4.7-4.7-4.7z"/></svg>
       <span>宠物</span>
     </button>
-    <button type="button" class="m-tab" id="tabStats">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
-      <span>统计</span>
+    <button type="button" class="m-tab" id="tabLearn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/></svg>
+      <span>学习</span>
     </button>
     <button type="button" class="m-tab" id="tabSettings">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.05.05a2 2 0 1 1-2.83 2.83l-.05-.05a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.05.05a2 2 0 1 1-2.83-2.83l.05-.05a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.05-.05a2 2 0 1 1 2.83-2.83l.05.05a1.7 1.7 0 0 0 1.87.34h.09a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.05-.05a2 2 0 1 1 2.83 2.83l-.05.05a1.7 1.7 0 0 0-.34 1.87v.09a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1z"/></svg>
@@ -996,6 +1046,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         <button type="button" class="set-btn" id="setCat">管理分类</button>
       </div>
       <div class="set-group"><div class="set-title">成长档案（查看）</div>
+        <button type="button" class="set-btn" id="setStats">趋势统计</button>
         <button type="button" class="set-btn" id="setLog">积分流水</button>
         <button type="button" class="set-btn" id="setBadges">徽章墙</button>
         <button type="button" class="set-btn" id="setRank">本月排行</button>
@@ -1112,43 +1163,10 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     </section>
 
     <section class="card">
-      <h3 class="chart-title"><span class="dot" style="background:var(--mint)"></span>创建计划（排课）</h3>
-      <p class="chart-sub">排课后会在对应日期生成强制待办，完成得积分并扣课数。课程不做时间限制，忘充值也能先上课，剩余课数可为负数，充值后自动补平。</p>
-      <div class="plan-grid">
-        <label>课程<select id="planCourse"></select></label>
+      <div class="card-head" style="margin-bottom:10px">
+        <h3 class="chart-title" style="margin:0"><span class="dot" style="background:var(--coral)"></span>当前计划</h3>
+        <button class="btn-add" id="btnPlanOpen">+ 创建计划</button>
       </div>
-      <div class="field" style="margin-top:2px"><label>排课类型</label>
-        <div class="gender-row" id="planTypeRow">
-          <span class="g-chip on" data-t="once">单次排课（临时加课，用完就结束）</span>
-          <span class="g-chip" data-t="weekly">每周循环</span>
-        </div>
-      </div>
-      <div id="planOnceBox">
-        <div class="field"><label>上课日期</label><input id="planDate" type="date"></div>
-      </div>
-      <div id="planWeekBox" style="display:none">
-        <div class="field"><label>每周哪几天（可多选，点已选中的可单独设置该天上课时间）</label>
-          <div class="week-switch" id="planWeek">
-            <button type="button" data-day="1">一</button><button type="button" data-day="2">二</button>
-            <button type="button" data-day="3">三</button><button type="button" data-day="4">四</button>
-            <button type="button" data-day="5">五</button><button type="button" data-day="6">六</button>
-            <button type="button" data-day="7">日</button>
-          </div>
-        </div>
-        <div class="field"><label>循环范围（开始默认今天，结束不填则长期有效）</label>
-          <div class="range-row"><input id="planStart" type="date"><span class="range-sep">至</span><input id="planEnd" type="date"></div>
-        </div>
-      </div>
-      <div class="plan-grid">
-        <label>上课时间<input id="planTime" type="time"></label>
-        <label>扣课数<input id="planN" type="number" min="1" value="1"></label>
-        <label>奖励积分<input id="planPts" type="number" min="1" value="5"></label>
-      </div>
-      <button class="btn primary" id="btnPlan" style="margin-top:10px">排课 → 生成待办</button>
-    </section>
-
-    <section class="card">
-      <h3 class="chart-title"><span class="dot" style="background:var(--coral)"></span>当前计划</h3>
       <p class="chart-sub">排过的计划都会保留在这里，可修改或删除；修改/删除只影响当天及以后，过去的课次记录保持不变</p>
       <div id="planList"></div>
     </section>
@@ -1158,6 +1176,121 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
       <p class="chart-sub">结束的课程或计划会归档在这里，可随时恢复排课</p>
       <div id="endedPlanList"></div>
     </section>
+  </div>
+
+  <!-- ===== 拼音学习系统二级页 ===== -->
+  <div class="stats-page" id="learnPage" style="display:none">
+    <div class="stats-head">
+      <button class="btn-add alt2" id="btnBackLearn">← 返回主页</button>
+      <h2 id="learnTitle">学习系统</h2>
+    </div>
+
+    <section class="card" id="learnIntro">
+      <div class="sub-h" style="margin-bottom:8px">拼音练习</div>
+      <p class="chart-sub">随机出题 20 道：看汉字选拼音、看拼音选汉字、补全声母或韵母。全部做完提交后，查看得分与正确答案。</p>
+      <button class="btn primary" id="btnStartLearn">开始练习（20 题）</button>
+      <button class="btn alt" id="btnLearnStats" style="margin-top:10px">查看分数趋势</button>
+    </section>
+    <section class="card" id="mathIntroCard" style="margin-top:14px">
+      <div class="sub-h" style="margin-bottom:8px">口算练习</div>
+      <p class="chart-sub">100 以内加减法，每次 10 道，键盘输入答案，提交后看分数与正确答案。先选一种题型，或直接用“综合”。</p>
+      <button class="btn primary" id="btnGoMath">开始练习（10 题）</button>
+      <button class="btn alt" id="btnGoMathStats" style="margin-top:10px">查看分数趋势</button>
+    </section>
+
+    <section class="card" id="learnQuiz" style="display:none">
+      <div class="learn-top">
+        <span id="learnProgress">第 1 / 20 题</span>
+        <span class="learn-type-tag" id="learnType">选拼音</span>
+      </div>
+      <h3 class="learn-q" id="learnQ"></h3>
+      <div id="learnOptions"></div>
+      <div class="learn-nav">
+        <button class="btn alt" id="learnPrev" style="display:none">上一题</button>
+        <button class="btn alt" id="learnNext">下一题</button>
+        <button class="btn primary" id="learnSubmit" style="display:none">提交答卷</button>
+      </div>
+    </section>
+
+    <section class="card" id="learnResult" style="display:none">
+      <div class="result-score" id="learnScore"></div>
+      <div class="sub-h">逐题回顾</div>
+      <div id="learnReview"></div>
+      <button class="btn primary" id="learnAgain">再练一次</button>
+      <button class="btn alt" id="btnResultStats" style="margin-top:8px">查看分数趋势</button>
+    </section>
+  </div>
+
+  <!-- ===== 口算练习二级页（v55） ===== -->
+  <div class="stats-page" id="mathPage" style="display:none">
+    <div class="stats-head">
+      <button class="btn-add alt2" id="btnBackMath">← 返回学习</button>
+      <h2 id="mathTitle">口算练习</h2>
+    </div>
+    <section class="card" id="mathIntro">
+      <p class="chart-sub">100 以内加减法，每次 10 道，键盘输入答案，提交后看分数与正确答案。先选一种题型，或直接用"综合"。</p>
+      <div class="math-types" id="mathTypes"></div>
+      <button class="btn primary" id="btnStartMath">开始练习（10 题）</button>
+      <button class="btn alt" id="btnMathStats" style="margin-top:10px">查看分数趋势</button>
+    </section>
+    <section class="card" id="mathQuiz" style="display:none">
+      <div class="learn-top">
+        <span id="mathProgress">第 1 / 10 题</span>
+        <span class="learn-type-tag" id="mathType">综合</span>
+      </div>
+      <div class="math-q" id="mathQ"></div>
+      <input type="number" id="mathInput" inputmode="numeric" placeholder="输入答案" autocomplete="off">
+      <div class="learn-nav">
+        <button class="btn alt" id="mathPrev" style="display:none">上一题</button>
+        <button class="btn alt" id="mathNext">下一题</button>
+        <button class="btn primary" id="mathSubmit" style="display:none">提交答卷</button>
+      </div>
+    </section>
+    <section class="card" id="mathResult" style="display:none">
+      <div class="result-score" id="mathScore"></div>
+      <div class="sub-h">逐题回顾</div>
+      <div id="mathReview"></div>
+      <button class="btn primary" id="mathAgain">再练一次</button>
+      <button class="btn alt" id="mathResultStats" style="margin-top:8px">查看分数趋势</button>
+    </section>
+    <section class="card" id="mathStatsCard" style="display:none">
+      <div class="ls-cards">
+        <div class="ls-card"><b id="msTotal">0</b><span>练习次数</span></div>
+        <div class="ls-card"><b id="msBest">–</b><span>最高分</span></div>
+        <div class="ls-card"><b id="msAvg">–</b><span>平均分</span></div>
+        <div class="ls-card"><b id="msLast5">–</b><span>近5次平均</span></div>
+      </div>
+      <div class="chart-box">
+        <div class="ls-empty" id="msChartEmpty">还没有练习记录，先去练一组吧</div>
+        <svg id="msChart" viewBox="0 0 420 190" style="display:none"></svg>
+      </div>
+      <div class="sub-h">最近记录</div>
+      <div class="ls-list" id="msList"></div>
+      <div class="ls-empty" id="msListEmpty" style="display:none">暂无记录</div>
+      <button class="btn-add alt2" id="msClear" style="margin-top:4px">清空记录</button>
+    </section>
+  </div>
+
+  <!-- ===== 分数趋势二级页（v54） ===== -->
+  <div class="stats-page" id="learnStatsPage" style="display:none">
+    <div class="stats-head">
+      <button class="btn-add alt2" id="btnBackLearnStats">← 返回学习</button>
+      <h2>分数趋势</h2>
+    </div>
+    <div class="ls-cards">
+      <div class="ls-card"><b id="lsTotal">0</b><span>练习次数</span></div>
+      <div class="ls-card"><b id="lsBest">–</b><span>最高分</span></div>
+      <div class="ls-card"><b id="lsAvg">–</b><span>平均分</span></div>
+      <div class="ls-card"><b id="lsLast5">–</b><span>近5次平均</span></div>
+    </div>
+    <div class="chart-box">
+      <div class="ls-empty" id="lsChartEmpty">还没有练习记录，先去练一组吧</div>
+      <svg id="lsChart" viewBox="0 0 420 190" style="display:none"></svg>
+    </div>
+    <div class="sub-h">最近记录</div>
+    <div class="ls-list" id="lsList"></div>
+    <div class="ls-empty" id="lsListEmpty" style="display:none">暂无记录</div>
+    <button class="btn-add alt2" id="btnClearStats" style="margin-top:4px">清空记录</button>
   </div>
 
   <!-- ===== 统计二级页 ===== -->
@@ -1207,6 +1340,43 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
 </div>
 
 <!-- ===== 补习课弹窗 ===== -->
+<div class="modal-cover" id="planCover">
+  <div class="modal">
+    <h3>创建计划（排课）</h3>
+    <p class="chart-sub" style="margin:-6px 0 10px">排课后会在对应日期生成强制待办，完成得积分并扣课数。课程不做时间限制，忘充值也能先上课，剩余课数可为负数，充值后自动补平。</p>
+    <div class="plan-grid">
+      <label>课程<select id="planCourse"></select></label>
+    </div>
+    <div class="field" style="margin-top:2px"><label>排课类型</label>
+      <div class="gender-row" id="planTypeRow">
+        <span class="g-chip on" data-t="once">单次排课（临时加课，用完就结束）</span>
+        <span class="g-chip" data-t="weekly">每周循环</span>
+      </div>
+    </div>
+    <div id="planOnceBox">
+      <div class="field"><label>上课日期</label><input id="planDate" type="date"></div>
+    </div>
+    <div id="planWeekBox" style="display:none">
+      <div class="field"><label>每周哪几天（可多选，点已选中的可单独设置该天上课时间）</label>
+        <div class="week-switch" id="planWeek">
+          <button type="button" data-day="1">一</button><button type="button" data-day="2">二</button>
+          <button type="button" data-day="3">三</button><button type="button" data-day="4">四</button>
+          <button type="button" data-day="5">五</button><button type="button" data-day="6">六</button>
+          <button type="button" data-day="7">日</button>
+        </div>
+      </div>
+      <div class="field"><label>循环范围（开始默认今天，结束不填则长期有效）</label>
+        <div class="range-row"><input id="planStart" type="date"><span class="range-sep">至</span><input id="planEnd" type="date"></div>
+      </div>
+    </div>
+    <div class="plan-grid">
+      <label>上课时间<input id="planTime" type="time"></label>
+      <label>扣课数<input id="planN" type="number" min="1" value="1"></label>
+      <label>奖励积分<input id="planPts" type="number" min="1" value="5"></label>
+    </div>
+    <div class="modal-actions"><button class="btn ghost" id="planCancel">取消</button><button class="btn primary" id="btnPlan">排课 → 生成待办</button></div>
+  </div>
+</div>
 <div class="modal-cover" id="courseCover">
   <div class="modal">
     <h3>创建新课程</h3>
@@ -2353,6 +2523,10 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     return out;
   }
   var mandateOpen=false,mandateItems=[],mandateCover=null,reasonTarget=null;
+  function resetMandate(){
+    mandateOpen=false;mandateItems=[];
+    if(mandateCover)mandateCover.classList.remove('show');
+  }
   function maybeOpenMandate(){
     if(!mandateCover||state.selDate!==todayStr()||mandateOpen)return;
     var p=pendingHist();
@@ -2833,6 +3007,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         planWeekSel=[];planTimes={};
         document.querySelectorAll('#planWeek button.on').forEach(function(b){b.classList.remove('on')});
         save();render();renderTutorPage();
+        document.getElementById('planCover').classList.remove('show');
         var tip='已排课：'+text+'（'+planTimeText(lesson)+'，每周扣'+n+'节，完成得 +'+pts+' 积分）';
         if(ek)tip+='，至 '+fmtEnd(ek)+' 结束';
         toast(tip);
@@ -2845,8 +3020,22 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         state.selDate=dateStr;
         var pp2=dateStr.split('-');calY=+pp2[0];calM=+pp2[1]-1;
         save();render();renderTutorPage();
+        document.getElementById('planCover').classList.remove('show');
         toast('已排课：'+text+'（扣'+n+'节，完成得 +'+pts+' 积分）');
       }
+    };
+    var po=document.getElementById('btnPlanOpen');
+    if(po)po.onclick=function(){
+      renderPlanOptions();
+      var pd=document.getElementById('planDate');if(pd&&!pd.value)pd.value=toInput(todayStr());
+      var ps=document.getElementById('planStart');if(ps&&!ps.value)ps.value=toInput(todayStr());
+      document.getElementById('planCover').classList.add('show');
+    };
+    var planCancel=document.getElementById('planCancel');
+    if(planCancel)planCancel.onclick=function(){
+      document.getElementById('planCover').classList.remove('show');
+      planWeekSel=[];planTimes={};
+      document.querySelectorAll('#planWeek button.on').forEach(function(b){b.classList.remove('on')});
     };
     // 充值记录弹窗
     document.getElementById('tpClose').onclick=function(){document.getElementById('topupCover').classList.remove('show')};
@@ -4779,13 +4968,22 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     var isTutor=location.hash==='#tutor';
     var isPet=location.hash==='#pet';
     var isSet=location.hash==='#settings';
-    document.getElementById('homeView').style.display=(isStats||isTutor||isPet||isSet)?'none':'block';
+    var isLearn=location.hash==='#learn';
+    var isLearnStats=location.hash==='#learnStats';
+    var isMath=location.hash==='#math';
+    document.getElementById('homeView').style.display=(isStats||isTutor||isPet||isSet||isLearn||isLearnStats||isMath)?'none':'block';
     document.getElementById('statsPage').style.display=isStats?'block':'none';
     document.getElementById('tutorPage').style.display=isTutor?'block':'none';
     document.getElementById('petPage').style.display=isPet?'block':'none';
     document.getElementById('settingsPage').style.display=isSet?'block':'none';
+    document.getElementById('learnPage').style.display=isLearn?'block':'none';
+    document.getElementById('learnStatsPage').style.display=isLearnStats?'block':'none';
+    document.getElementById('mathPage').style.display=isMath?'block':'none';
     if(isStats){renderStats();window.scrollTo(0,0)}
     if(isTutor){renderTutorPage();window.scrollTo(0,0)}
+    if(isLearn){window.scrollTo(0,0)}
+    if(isLearnStats){renderLearnStats();window.scrollTo(0,0)}
+    if(isMath){window.scrollTo(0,0)}
     if(isPet||isSet){
       // 独立页内容兜底：首次加载时序异常时，若内容为空则重新移入宠物卡/设置内容
       var pb2=document.getElementById('petPageBody');
@@ -4919,10 +5117,28 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     openModal('task');
     modalEdit=true;editId=id;
     document.getElementById('modalTitle').textContent='编辑待办';
-    document.getElementById('fieldType').style.display='none';
-    document.getElementById('fieldDate').style.display='none';
-    document.getElementById('fieldDays').style.display='none';
-    document.getElementById('fieldRange').style.display='none';
+    var isLesson=!!t.lessonId;
+    var fT=document.getElementById('fieldType'),fD=document.getElementById('fieldDate'),
+        fW=document.getElementById('fieldDays'),fR=document.getElementById('fieldRange');
+    if(!isLesson){
+      // 非课程待办：类型/日期/星期/日期范围与新建待办一致，可自由调整（历史完成记录保留不丢）
+      fT.style.display='block';
+      todoType=t.type||'once';
+      setType(todoType);
+      if(todoType==='once'){
+        fD.style.display='block';
+        inpDate.value=toInput(t.date||state.selDate);
+      }else{
+        fR.style.display='block';
+        inpStartDate.value=toInput(t.start||todayStr());
+        inpEndDate.value=t.end?toInput(t.end):'';
+      }
+      selDays=(t.days&&t.days.slice)?t.days.slice():[1,2,3,4,5,6,7];
+      syncWeek();
+    }else{
+      // 课程待办：日期安排由排课系统管理，保持只读
+      fT.style.display='none';fD.style.display='none';fW.style.display='none';fR.style.display='none';
+    }
     inpText.value=t.text;
     if(!t.subs||!t.subs.length)inpPoints.value=t.pts;
     subDraft=t.subs?t.subs.map(function(s){return{name:s.name,pts:s.pts}}):[];
@@ -4955,6 +5171,24 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         if(!et){closeModal();return}
         freezeHistory(et);
         et.text=text;et.pts=pts2;et.subs=subsArr.length?subsArr:null;et.cat=modalCat||'';
+        if(!et.lessonId){
+          // 编辑类型/日期/星期/范围（与新建待办字段一致）；历史完成记录保留不丢
+          var nt2=todoType;
+          if(nt2==='once'){
+            var d1=toKey(inpDate.value);
+            if(cmpDate(d1,today)<0){toast('不能给过去的日期创建待办');return}
+            et.type='once';et.date=d1;et.start=null;et.end=null;et.days=null;
+            if(d1!==state.selDate)state.selDate=d1;
+          }else{
+            var s1=toKey(inpStartDate.value||today);
+            if(cmpDate(s1,today)<0){toast('开始日期不能早于今天');return}
+            et.type=nt2;et.date=null;et.start=s1;
+            var e1=inpEndDate.value;
+            if(e1){var ek1=toKey(e1);if(cmpDate(ek1,s1)<0){toast('结束日期不能早于开始日期');return};et.end=ek1}
+            else et.end=null;
+            et.days=nt2==='weekly'?selDays.slice():null;
+          }
+        }
         if(et.lessonId){
           var lv=state.lessons.find(function(x){return x.id===et.lessonId});
           if(lv){
@@ -5110,6 +5344,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         var maxId=0;
         s.todos.concat(s.rewards,s.rules,s.penalties).forEach(function(x){if(x.id>maxId)maxId=x.id});
         uid=Math.max(uid,maxId+1);
+        resetMandate();
         save();render();
         toast('备份已恢复');
       }catch(e){toast('读取备份失败，请检查文件')}
@@ -5225,26 +5460,31 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   };
   document.getElementById('inpCatName').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('btnAddCat').onclick()});
   document.getElementById('btnStats').onclick=function(){location.hash='#stats'};
+  document.getElementById('btnLearn').onclick=function(){location.hash='#learn'};
   // ===== 手机端底部导航与设置中心（v38） =====
   var tabToday=document.getElementById('tabToday'),tabTutor=document.getElementById('tabTutor'),
       tabStats=document.getElementById('tabStats'),tabSettings=document.getElementById('tabSettings'),
-      tabPet=document.getElementById('tabPet');
+      tabPet=document.getElementById('tabPet'),tabLearn=document.getElementById('tabLearn');
   function setMTab(name){
-    var map={'today':tabToday,'tutor':tabTutor,'stats':tabStats,'settings':tabSettings,'pet':tabPet};
+    var map={'today':tabToday,'tutor':tabTutor,'settings':tabSettings,'pet':tabPet,'learn':tabLearn};
     for(var k in map){if(map[k])map[k].classList.toggle('on',k===name)}
   }
   if(tabPet)tabPet.onclick=function(){settingsCover.classList.remove('show');location.hash='#pet'};
   if(tabToday)tabToday.onclick=function(){location.hash='#home';window.scrollTo({top:0,behavior:'smooth'});setMTab('today')};
   if(tabTutor)tabTutor.onclick=function(){location.hash='#tutor';setMTab('tutor')};
-  if(tabStats)tabStats.onclick=function(){settingsCover.classList.remove('show');location.hash='#stats';setMTab('stats')};
   if(tabSettings)tabSettings.onclick=function(){location.hash='#settings';setMTab('settings')};
+  if(tabLearn)tabLearn.onclick=function(){settingsCover.classList.remove('show');location.hash='#learn';setMTab('learn')};
   window.addEventListener('hashchange',function(){
     if(!location.hash||location.hash==='#home')setMTab('today');
     else if(location.hash==='#pet')setMTab('pet');
     else if(location.hash==='#tutor')setMTab('tutor');
     else if(location.hash==='#settings')setMTab('settings');
+    else if(location.hash==='#stats')setMTab('stats');
+    else if(location.hash==='#learn')setMTab('learn');
   });
   var settingsCover=document.getElementById('settingsCover');
+  var setStatsBtn=document.getElementById('setStats');
+  if(setStatsBtn)setStatsBtn.onclick=function(){settingsCover.classList.remove('show');if(isMobile())openStatsModal();else{location.hash='#stats';setMTab('stats')}};
   document.getElementById('setCancel').onclick=function(){settingsCover.classList.remove('show')};
   settingsCover.onclick=function(e){if(e.target===settingsCover)settingsCover.classList.remove('show')};
   var fsBtn=document.getElementById('setFs');
@@ -5314,8 +5554,8 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         clearTimeout(syncT);
         syncT=setTimeout(function(){
           giteePut().then(function(r){
-            if(r&&r.ok){syncMsg('已同步到云端',1)}
-            else if(r&&r.msg){syncMsg(r.msg)}
+            // 使用中静默自动同步：成功不提醒，失败才提示（避免打扰，同时防止误以为已同步）
+            if(r&&!r.ok&&r.msg){syncMsg(r.msg)}
           });
         },1200);
       }
@@ -5325,8 +5565,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     clearTimeout(syncT);
     syncT=setTimeout(function(){
       syncApi('/api/save','POST',{token:SYNC.token,data:state}).then(function(r){
-        if(r&&r.ok){syncMsg('已同步到云端',1)}
-        else if(r&&r.msg){syncMsg(r.msg)}
+        if(r&&!r.ok&&r.msg){syncMsg(r.msg)}
       });
     },1200);
   }
@@ -5362,6 +5601,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   function applyCloud(cloud){
     state=JSON.parse(JSON.stringify(cloud));
     localStorage.setItem(KEY,JSON.stringify(state));
+    resetMandate();
     render();
   }
   function syncConflict(cloud){
@@ -5388,7 +5628,6 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   function syncAuto(){
     if(SYNC.mode!=='gitee')return;
     if(!(GITEED.token&&GITEED.repo&&GITEED.name))return;
-    syncMsg('正在同步...',1);
     giteeGet().then(function(r){
       if(r&&r.ok&&r.data){
         var cloud=r.data;
@@ -5412,7 +5651,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         if(!state._meta)state._meta={};
         if(typeof state._meta.lastMod!=='number')state._meta.lastMod=Date.now();
         localStorage.setItem(KEY,JSON.stringify(state));
-        syncPush();
+        syncPush();syncMsg('已上传本机数据到云端',1);
       }else if(r&&r.msg){
         syncMsg(r.msg);
       }
@@ -5517,9 +5756,31 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   // ===== 手机端今日页重构 v39：快捷操作 + 成长档案 + 日历折叠 =====
   var mListCover=document.getElementById('mListCover'),mListTitle=document.getElementById('mListTitle'),mListBody=document.getElementById('mListBody');
   var calHead=document.getElementById('calHead'),calCardEl=document.getElementById('calCard'),calFoldLine=document.getElementById('calFoldLine');
-  function openMList(title,fn){mListTitle.textContent=title;mListBody.innerHTML='';fn();mListCover.classList.add('show')}
-  document.getElementById('mListClose').onclick=function(){mListCover.classList.remove('show')};
-  mListCover.onclick=function(e){if(e.target===mListCover)mListCover.classList.remove('show')};
+  var _mOnClose=null;
+  function openMList(title,fn,onClose){mListTitle.textContent=title;mListBody.innerHTML='';fn();mListCover.classList.add('show');_mOnClose=onClose||null}
+  function closeMList(){mListCover.classList.remove('show');if(_mOnClose){var f=_mOnClose;_mOnClose=null;f()}}
+  document.getElementById('mListClose').onclick=closeMList;
+  mListCover.onclick=function(e){if(e.target===mListCover)closeMList()};
+  // v61：设置-趋势统计 以弹窗展示（与积分流水/徽章墙/本月排行统一视觉）
+  var _statsHost=null;
+  function openStatsModal(){
+    var sp=document.getElementById('statsPage');
+    var head=sp.querySelector('.stats-head');
+    if(head)head.style.display='none';
+    _statsHost=sp.parentNode;
+    mListTitle.textContent='趋势统计';
+    mListBody.innerHTML='';
+    mListBody.appendChild(sp);
+    sp.style.display='block';
+    renderStats();
+    mListCover.classList.add('show');
+    _mOnClose=function(){
+      if(head)head.style.display='';
+      if(_statsHost)_statsHost.appendChild(sp);
+      sp.style.display='none';
+      _statsHost=null;_mOnClose=null;
+    };
+  }
   function isMobile(){return window.innerWidth<=768}
   function foldCal(){if(calCardEl){calCardEl.classList.add('fold');calCardEl.classList.remove('open')}}
   function openCal(){if(calCardEl){calCardEl.classList.remove('fold');calCardEl.classList.add('open')}}
@@ -5534,9 +5795,9 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   function applyVer(){
     var m=window.innerWidth<=768;
     var vt=document.getElementById('verTag');
-    if(vt)vt.textContent=m?'mobile v48 第1版':'v48';
+    if(vt)vt.textContent=m?'mobile v62 第1版':'v62';
     var sv=document.querySelector('.set-ver');
-    if(sv)sv.textContent=m?'成长小星球 mobile v48 第1版 · 数据保存在本机浏览器':'成长小星球 v48 · 数据保存在本机浏览器';
+    if(sv)sv.textContent=m?'成长小星球 mobile v62 第1版 · 数据保存在本机浏览器':'成长小星球 v62 · 数据保存在本机浏览器';
   }
   applyVer();
   function openRuleList(){
@@ -5562,6 +5823,8 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   if(tabTutor)tabTutor.onclick=function(){settingsCover.classList.remove('show');location.hash='#tutor';setMTab('tutor')};
   document.getElementById('btnTutor').onclick=function(){location.hash='#tutor'};
   document.getElementById('btnBackHome').onclick=function(){location.hash='#home'};
+  var btnBackLearn=document.getElementById('btnBackLearn');
+  if(btnBackLearn)btnBackLearn.onclick=function(){location.hash='#home'};
   var btnBackPet=document.getElementById('btnBackPet');
   if(btnBackPet)btnBackPet.onclick=function(){location.hash='#home'};
   bindTutor();
@@ -5571,6 +5834,398 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   document.getElementById('penCover').onclick=function(e){if(e.target===document.getElementById('penCover'))document.getElementById('penCover').classList.remove('show')};
   document.getElementById('bClose').onclick=function(){document.getElementById('bCover').classList.remove('show')};
   document.getElementById('bCover').onclick=function(e){if(e.target===document.getElementById('bCover'))document.getElementById('bCover').classList.remove('show')};
+  // ===== 学习系统（v62） =====
+  var PY_BANK=[
+    {w:'我',py:'wǒ',sm:'w',ym:'o'},{w:'你',py:'nǐ',sm:'n',ym:'i'},{w:'他',py:'tā',sm:'t',ym:'a'},
+    {w:'大',py:'dà',sm:'d',ym:'a'},{w:'小',py:'xiǎo',sm:'x',ym:'iao'},{w:'山',py:'shān',sm:'sh',ym:'an'},
+    {w:'水',py:'shuǐ',sm:'sh',ym:'ui'},{w:'火',py:'huǒ',sm:'h',ym:'uo'},{w:'天',py:'tiān',sm:'t',ym:'ian'},
+    {w:'云',py:'yún',sm:'y',ym:'un'},{w:'风',py:'fēng',sm:'f',ym:'eng'},{w:'雨',py:'yǔ',sm:'y',ym:'u'},
+    {w:'花',py:'huā',sm:'h',ym:'ua'},{w:'草',py:'cǎo',sm:'c',ym:'ao'},{w:'树',py:'shù',sm:'sh',ym:'u'},
+    {w:'鸟',py:'niǎo',sm:'n',ym:'iao'},{w:'鱼',py:'yú',sm:'y',ym:'u'},{w:'马',py:'mǎ',sm:'m',ym:'a'},
+    {w:'牛',py:'niú',sm:'n',ym:'iu'},{w:'羊',py:'yáng',sm:'y',ym:'ang'},{w:'猫',py:'māo',sm:'m',ym:'ao'},
+    {w:'狗',py:'gǒu',sm:'g',ym:'ou'},{w:'书',py:'shū',sm:'sh',ym:'u'},{w:'笔',py:'bǐ',sm:'b',ym:'i'},
+    {w:'门',py:'mén',sm:'m',ym:'en'},{w:'心',py:'xīn',sm:'x',ym:'in'},{w:'手',py:'shǒu',sm:'sh',ym:'ou'},
+    {w:'足',py:'zú',sm:'z',ym:'u'},{w:'人',py:'rén',sm:'r',ym:'en'},{w:'春',py:'chūn',sm:'ch',ym:'un'},
+    {w:'秋',py:'qiū',sm:'q',ym:'iu'},{w:'冬',py:'dōng',sm:'d',ym:'ong'},{w:'红',py:'hóng',sm:'h',ym:'ong'},
+    {w:'白',py:'bái',sm:'b',ym:'ai'},{w:'黑',py:'hēi',sm:'h',ym:'ei'},{w:'绿',py:'lǜ',sm:'l',ym:'ü'},
+    {w:'蓝',py:'lán',sm:'l',ym:'an'},{w:'早',py:'zǎo',sm:'z',ym:'ao'},{w:'晚',py:'wǎn',sm:'w',ym:'an'},
+    {w:'年',py:'nián',sm:'n',ym:'ian'},{w:'星',py:'xīng',sm:'x',ym:'ing'},{w:'光',py:'guāng',sm:'g',ym:'uang'},
+    {w:'明',py:'míng',sm:'m',ym:'ing'},{w:'学',py:'xué',sm:'x',ym:'ue'},{w:'习',py:'xí',sm:'x',ym:'i'},
+    {w:'好',py:'hǎo',sm:'h',ym:'ao'},{w:'快',py:'kuài',sm:'k',ym:'uai'},{w:'乐',py:'lè',sm:'l',ym:'e'},
+    {w:'笑',py:'xiào',sm:'x',ym:'iao'},{w:'哭',py:'kū',sm:'k',ym:'u'},{w:'跑',py:'pǎo',sm:'p',ym:'ao'},
+    {w:'跳',py:'tiào',sm:'t',ym:'iao'},{w:'吃',py:'chī',sm:'ch',ym:'i'},{w:'喝',py:'hē',sm:'h',ym:'e'},
+    {w:'坐',py:'zuò',sm:'z',ym:'uo'},{w:'站',py:'zhàn',sm:'zh',ym:'an'},{w:'走',py:'zǒu',sm:'z',ym:'ou'},
+    {w:'看',py:'kàn',sm:'k',ym:'an'},{w:'听',py:'tīng',sm:'t',ym:'ing'},{w:'说',py:'shuō',sm:'sh',ym:'uo'},
+    {w:'想',py:'xiǎng',sm:'x',ym:'iang'},{w:'做',py:'zuò',sm:'z',ym:'uo'},{w:'玩',py:'wán',sm:'w',ym:'an'},
+    {w:'新',py:'xīn',sm:'x',ym:'in'},{w:'高',py:'gāo',sm:'g',ym:'ao'},{w:'长',py:'cháng',sm:'ch',ym:'ang'},
+    {w:'短',py:'duǎn',sm:'d',ym:'uan'},{w:'胖',py:'pàng',sm:'p',ym:'ang'},{w:'瘦',py:'shòu',sm:'sh',ym:'ou'},
+    {w:'冷',py:'lěng',sm:'l',ym:'eng'},{w:'热',py:'rè',sm:'r',ym:'e'},{w:'甜',py:'tián',sm:'t',ym:'ian'},
+    {w:'苦',py:'kǔ',sm:'k',ym:'u'},
+    {w:'天空',py:'tiānkōng'},{w:'白云',py:'báiyún'},{w:'太阳',py:'tàiyáng'},{w:'月亮',py:'yuèliang'},
+    {w:'星星',py:'xīngxing'},{w:'学校',py:'xuéxiào'},{w:'老师',py:'lǎoshī'},{w:'同学',py:'tóngxué'},
+    {w:'书包',py:'shūbāo'},{w:'铅笔',py:'qiānbǐ'},{w:'苹果',py:'píngguǒ'},{w:'西瓜',py:'xīguā'},
+    {w:'妈妈',py:'māma'},{w:'爸爸',py:'bàba'},{w:'哥哥',py:'gēge'},{w:'姐姐',py:'jiějie'},
+    {w:'快乐',py:'kuàilè'},{w:'开心',py:'kāixīn'},{w:'吃饭',py:'chīfàn'},{w:'喝水',py:'hēshuǐ'},
+    {w:'跑步',py:'pǎobù'},{w:'唱歌',py:'chànggē'},{w:'跳舞',py:'tiàowǔ'},{w:'读书',py:'dúshū'},
+    {w:'写字',py:'xiězì'},{w:'画画',py:'huàhuà'},{w:'熊猫',py:'xióngmāo'},{w:'老虎',py:'lǎohǔ'},
+    {w:'大象',py:'dàxiàng'},{w:'猴子',py:'hóuzi'},{w:'金鱼',py:'jīnyú'},{w:'彩虹',py:'cǎihóng'},
+    {w:'火车',py:'huǒchē'},{w:'飞机',py:'fēijī'},{w:'汽车',py:'qìchē'}
+  ];
+  function pyShuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+  function pyDistinct(arr){var o={},r=[];for(var i=0;i<arr.length;i++){if(!o[arr[i]]){o[arr[i]]=1;r.push(arr[i])}}return r}
+  function pyYmdai(item){return item.sm?item.py.slice(item.sm.length):item.py}
+  var learn={qs:[],cur:0,ans:[]};
+  function startLearn(){
+    var singles=PY_BANK.filter(function(x){return x.sm});
+    var sSel=pyShuffle(singles.slice()).slice(0,6);
+    var rest=pyShuffle(PY_BANK.slice()).slice(0,14);
+    var qs=[];
+    sSel.forEach(function(it){qs.push(pyBuildQ(it,3))});
+    rest.forEach(function(it){qs.push(pyBuildQ(it,1+Math.floor(Math.random()*2)))});
+    qs=pyShuffle(qs);
+    learn={qs:qs,cur:0,ans:[]};
+    renderLearn();
+  }
+  function pyBuildQ(item,type){
+    var singles=PY_BANK.filter(function(x){return x.sm});
+    if(type===1){
+      var cand=pyDistinct(PY_BANK.map(function(x){return x.py})).filter(function(p){return p!==item.py});
+      var opts=pyShuffle([item.py].concat(pyShuffle(cand).slice(0,3)));
+      return {type:1,tag:'选拼音',stem:item.w,sub:'选出正确的拼音',opts:opts,ans:item.py};
+    }
+    if(type===2){
+      var cand=pyDistinct(PY_BANK.map(function(x){return x.w})).filter(function(w){return w!==item.w});
+      var opts=pyShuffle([item.w].concat(pyShuffle(cand).slice(0,3)));
+      return {type:2,tag:'选汉字',stem:item.py,sub:'选出对应的汉字 / 词语',opts:opts,ans:item.w};
+    }
+    var missSm=Math.random()<0.5;
+    if(missSm&&item.sm){
+      var cand=pyDistinct(singles.filter(function(x){return x.sm&&x.sm!==item.sm}).map(function(x){return x.sm}));
+      var opts=pyShuffle([item.sm].concat(pyShuffle(cand).slice(0,3)));
+      return {type:3,tag:'补声母',stem:item.w,sub:'补全声母',prompt:'？'+pyYmdai(item),opts:opts,ans:item.sm};
+    }
+    var cand=pyDistinct(singles.map(function(x){return pyYmdai(x)})).filter(function(p){return p!==pyYmdai(item)});
+    var opts=pyShuffle([pyYmdai(item)].concat(pyShuffle(cand).slice(0,3)));
+    return {type:3,tag:'补韵母',stem:item.w,sub:'补全韵母',prompt:item.sm+'？',opts:opts,ans:pyYmdai(item)};
+  }
+  function renderLearn(){
+    var box=document.getElementById('learnQuiz');
+    if(!box)return;
+    var q=learn.qs[learn.cur];
+    document.getElementById('learnProgress').textContent='第 '+(learn.cur+1)+' / '+learn.qs.length+' 题';
+    document.getElementById('learnType').textContent=q.tag;
+    var qEl=document.getElementById('learnQ');
+    if(q.type===3)qEl.innerHTML='<span>'+q.stem+'</span><span class="py-note">拼音：'+q.prompt+'　'+q.sub+'</span>';
+    else qEl.innerHTML='<span>'+q.stem+'</span><span class="py-note">'+q.sub+'</span>';
+    var optBox=document.getElementById('learnOptions');
+    optBox.innerHTML='';
+    q.opts.forEach(function(o,i){
+      var b=document.createElement('button');
+      b.type='button';b.className='learn-opt'+(learn.ans[learn.cur]===o?' on':'');
+      b.textContent='ABCD'[i]+' · '+o;
+      b.onclick=function(){
+        learn.ans[learn.cur]=o;
+        var bs=optBox.querySelectorAll('.learn-opt');
+        for(var j=0;j<bs.length;j++)bs[j].classList.toggle('on',bs[j]===b);
+      };
+      optBox.appendChild(b);
+    });
+    document.getElementById('learnPrev').style.display=learn.cur===0?'none':'inline-block';
+    var isLast=learn.cur===learn.qs.length-1;
+    document.getElementById('learnNext').style.display=isLast?'none':'inline-block';
+    document.getElementById('learnSubmit').style.display=isLast?'inline-block':'none';
+  }
+  function learnSetExit(on){
+    var bkL=document.getElementById('btnBackLearn'),lt=document.getElementById('learnTitle');
+    if(!bkL)return;
+    if(on){
+      bkL.textContent='← 退出练习';
+      bkL.style.display='inline-block';
+      bkL.onclick=function(){
+        document.getElementById('learnQuiz').style.display='none';
+        document.getElementById('learnResult').style.display='none';
+        document.getElementById('learnIntro').style.display='block';
+        document.getElementById('mathIntroCard').style.display='block';
+        learnSetExit(false);
+      };
+      if(lt)lt.style.display='none';
+    }else{
+      bkL.textContent='← 返回主页';
+      bkL.style.display='';
+      bkL.onclick=function(){location.hash='#home'};
+      if(lt)lt.style.display='';
+    }
+  }
+  function mathSetExit(on){
+    var bkM=document.getElementById('btnBackMath'),mt=document.getElementById('mathTitle');
+    if(!bkM)return;
+    if(on){
+      bkM.textContent='← 退出练习';
+      bkM.style.display='inline-block';
+      bkM.onclick=function(){
+        document.getElementById('mathQuiz').style.display='none';
+        document.getElementById('mathResult').style.display='none';
+        document.getElementById('mathStatsCard').style.display='none';
+        document.getElementById('mathIntro').style.display='block';
+        mathSetExit(false);
+      };
+      if(mt)mt.style.display='none';
+    }else{
+      bkM.textContent='← 返回学习';
+      bkM.style.display='';
+      bkM.onclick=function(){location.hash='#learn';showPage()};
+      if(mt)mt.style.display='';
+    }
+  }
+  function submitLearn(){
+    for(var i=0;i<learn.qs.length;i++)if(!learn.ans[i]){toast('第 '+(i+1)+' 题还没选答案');learn.cur=i;renderLearn();return}
+    var right=0;
+    for(var i2=0;i2<learn.qs.length;i2++)if(learn.ans[i2]===learn.qs[i2].ans)right++;
+    var pct=Math.round(right/learn.qs.length*100);
+    var stars=right>=18?'★★★★★':right>=15?'★★★★':right>=12?'★★★':right>=8?'★★':'★';
+    document.getElementById('learnIntro').style.display='none';
+    document.getElementById('learnQuiz').style.display='none';
+    var rs=document.getElementById('learnResult');
+    rs.style.display='block';
+    learnSetExit(true);
+    document.getElementById('learnScore').innerHTML='<b>'+right+' / '+learn.qs.length+'</b><span class="pct">正确率 '+pct+'%</span><div class="result-stars">'+stars+'</div>';
+    var rv=document.getElementById('learnReview');
+    rv.innerHTML='';
+    learn.qs.forEach(function(q,i){
+      var mine=learn.ans[i],ok=mine===q.ans;
+      var stemHtml=(q.type===3)?(q.stem+'（拼音 '+q.prompt+'）'):q.stem;
+      var d=document.createElement('div');d.className='review-item';
+      d.innerHTML='<span class="rv-q">'+(i+1)+'. '+stemHtml+'</span>　你的答案：'+(ok?'<span class="rv-ok">'+mine+'</span>':'<span class="rv-no">'+mine+'</span>')+(ok?'':'　正确答案：<span class="rv-correct">'+q.ans+'</span>');
+      rv.appendChild(d);
+    });
+    try{var _lr=JSON.parse(localStorage.getItem('xp_star_learn')||'{"recs":[]}');_lr.recs.push({t:Date.now(),d:new Date().toISOString().slice(0,10),s:right,p:pct});if(_lr.recs.length>200)_lr.recs=_lr.recs.slice(-200);localStorage.setItem('xp_star_learn',JSON.stringify(_lr))}catch(e){}
+    window.scrollTo(0,0);
+  }
+  function lsRecs(){try{var r=JSON.parse(localStorage.getItem('xp_star_learn')||'{"recs":[]}');return r.recs||[]}catch(e){return[]}}
+  function renderLearnStats(){
+    var recs=lsRecs();
+    var elT=document.getElementById('lsTotal'),elB=document.getElementById('lsBest'),elA=document.getElementById('lsAvg'),el5=document.getElementById('lsLast5');
+    if(!elT)return;
+    elT.textContent=recs.length;
+    if(!recs.length){
+      elB.textContent='–';elA.textContent='–';el5.textContent='–';
+      document.getElementById('lsChartEmpty').style.display='block';
+      document.getElementById('lsChart').style.display='none';
+      document.getElementById('lsListEmpty').style.display='block';
+      document.getElementById('lsList').innerHTML='';
+      document.getElementById('btnClearStats').style.display='none';
+      return;
+    }
+    var best=Math.max.apply(null,recs.map(function(r){return r.s}));
+    var sum=recs.reduce(function(a,r){return a+r.s},0);
+    var avg=Math.round(sum/recs.length*10)/10;
+    var last5=recs.slice(-5),s5=last5.reduce(function(a,r){return a+r.s},0);
+    var avg5=Math.round(s5/last5.length*10)/10;
+    elB.textContent=best;elA.textContent=avg;el5.textContent=avg5;
+    document.getElementById('lsChartEmpty').style.display='none';
+    var svg=document.getElementById('lsChart');svg.style.display='block';
+    var W=420,H=190,PL=34,PR=12,PT=14,PB=26;
+    var n=recs.length,x0=PL,x1=W-PR,y0=H-PB,y1=PT;
+    var px=function(i){return n===1?(x0+x1)/2:x0+(x1-x0)*i/(n-1)};
+    var py=function(v){return y0-(y0-y1)*(Math.max(0,Math.min(20,v))/20)};
+    var grid='';
+    for(var g=0;g<=4;g++){var gy=y0-(y0-y1)*g/4,gv=Math.round(20*g/4);grid+='<line x1="'+x0+'" y1="'+gy+'" x2="'+x1+'" y2="'+gy+'" stroke="#EFE7D8" stroke-width="1"/><text x="'+(x0-6)+'" y="'+(gy+4)+'" text-anchor="end" font-size="10" fill="#B9AFA0">'+gv+'</text>'}
+    var pts=recs.map(function(r,i){return px(i)+','+py(r.s)});
+    var dots='';
+    for(var k=0;k<recs.length;k++){var x=px(k),y=py(recs[k].s);dots+='<circle cx="'+x+'" cy="'+y+'" r="3" fill="#F0A33C"/><text x="'+x+'" y="'+(y-7)+'" text-anchor="middle" font-size="9" fill="#7A6B52" font-weight="700">'+recs[k].s+'</text>'}
+    var avgY=py(avg);
+    var avgLine='<line x1="'+x0+'" y1="'+avgY+'" x2="'+x1+'" y2="'+avgY+'" stroke="#B07A10" stroke-dasharray="4 3" stroke-width="1"/><text x="'+(x1-2)+'" y="'+(avgY-3)+'" text-anchor="end" font-size="9" fill="#B07A10">均'+avg+'</text>';
+    svg.innerHTML=grid+avgLine+'<polyline points="'+pts.join(' ')+'" fill="none" stroke="#F0A33C" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'+dots;
+    var listEl=document.getElementById('lsList'),listHtml='';
+    recs.slice(-10).reverse().forEach(function(r){
+      var idx=recs.indexOf(r),prev=idx>0?recs[idx-1].s:null;
+      var arrow=prev===null?'–':(r.s>prev?'<span class="up">↑</span>':(r.s<prev?'<span class="down">↓</span>':'<span class="flat">→</span>'));
+      var d=new Date(r.t),hm=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+      listHtml+='<div class="ls-row"><span class="t">'+r.d+' '+hm+'</span><span class="s">'+r.s+' / 20</span><span>'+r.p+'% '+arrow+'</span></div>';
+    });
+    listEl.innerHTML=listHtml;
+    document.getElementById('lsListEmpty').style.display='none';
+    document.getElementById('btnClearStats').style.display='inline-block';
+  }
+  var MATH_TYPES=[['1','整十加整十'],['2','两位数加整十'],['3','两位数不进位'],['4','整十减个位数'],['5','整十减几十几'],['6','两位数减整十'],['7','两位数减几十几'],['8','两位数不退位'],['9','加法巧算'],['10','减法巧算']];
+  var mathSel=0,math={qs:[],cur:0,ans:[]};
+  function mathPick(t){
+    var R=function(n){return Math.floor(Math.random()*n)};
+    function ab(){return{a:1+R(9),b:R(10)}}
+    var x,y,a,b,c;
+    switch(t){
+      case 1:a=1+R(9);b=1+R(10-a);return{t:1,q:(a*10)+' + '+(b*10),ans:a*10+b*10};
+      case 2:do{x=ab()}while(x.a===9);c=1+R(9-x.a);return{t:2,q:(x.a*10+x.b)+' + '+(c*10),ans:x.a*10+x.b+c*10};
+      case 3:do{x=ab();y=ab()}while(x.b+y.b>9||x.a+y.a>9);return{t:3,q:(x.a*10+x.b)+' + '+(y.a*10+y.b),ans:x.a*10+x.b+y.a*10+y.b};
+      case 4:a=1+R(9);b=1+R(9);return{t:4,q:(a*10)+' - '+b,ans:a*10-b};
+      case 5:do{a=2+R(8);b=1+R(9);c=R(10)}while(b*10+c>=a*10||(b*10+c)%10===0);return{t:5,q:(a*10)+' - '+(b*10+c),ans:a*10-b*10-c};
+      case 6:do{x=ab()}while(x.a<2);c=1+R(x.a-1);return{t:6,q:(x.a*10+x.b)+' - '+(c*10),ans:x.a*10+x.b-c*10};
+      case 7:do{x=ab();y=ab()}while(x.a<=y.a||x.b>=y.b);return{t:7,q:(x.a*10+x.b)+' - '+(y.a*10+y.b),ans:x.a*10+x.b-y.a*10-y.b};
+      case 8:do{x=ab();y=ab()}while(x.a<y.a||x.b<y.b||(x.a===y.a&&x.b===y.b));return{t:8,q:(x.a*10+x.b)+' - '+(y.a*10+y.b),ans:x.a*10+x.b-y.a*10-y.b};
+      case 9:do{x=ab();y=ab()}while(x.b+y.b!==10||x.a+y.a>8);return{t:9,q:(x.a*10+x.b)+' + '+(y.a*10+y.b),ans:x.a*10+x.b+y.a*10+y.b};
+      case 10:do{x=ab();y=ab()}while(x.a<=y.a||x.b>=y.b||(y.b!==8&&y.b!==9));return{t:10,q:(x.a*10+x.b)+' - '+(y.a*10+y.b),ans:x.a*10+x.b-y.a*10-y.b};
+    }
+    return{t:1,q:'10 + 10',ans:20};
+  }
+  function startMath(){
+    var type=mathSel===0?(1+Math.floor(Math.random()*10)):mathSel;
+    var qs=[];
+    for(var i=0;i<10;i++)qs.push(mathPick(type));
+    math={qs:qs,cur:0,ans:[]};
+    renderMath();
+  }
+  function renderMath(){
+    var box=document.getElementById('mathQuiz');if(!box)return;
+    var q=math.qs[math.cur];
+    document.getElementById('mathProgress').textContent='第 '+(math.cur+1)+' / '+math.qs.length+' 题';
+    document.getElementById('mathType').textContent=MATH_TYPES[q.t-1][1];
+    document.getElementById('mathQ').textContent=q.q+' = ?';
+    var inp=document.getElementById('mathInput');
+    inp.value=(math.ans[math.cur]===undefined)?'':math.ans[math.cur];
+    document.getElementById('mathPrev').style.display=math.cur===0?'none':'inline-block';
+    var isLast=math.cur===math.qs.length-1;
+    document.getElementById('mathNext').style.display=isLast?'none':'inline-block';
+    document.getElementById('mathSubmit').style.display=isLast?'inline-block':'none';
+    setTimeout(function(){try{inp.focus();inp.select()}catch(e){}},80);
+  }
+  function submitMath(){
+    for(var i=0;i<math.qs.length;i++)if(math.ans[i]===undefined){toast('第 '+(i+1)+' 题还没填答案');math.cur=i;renderMath();return}
+    var right=0;
+    for(var j=0;j<math.qs.length;j++)if(math.ans[j]===math.qs[j].ans)right++;
+    var pct=Math.round(right/math.qs.length*100);
+    var stars=right>=9?'★★★★★':right>=7?'★★★★':right>=5?'★★★':right>=3?'★★':'★';
+    document.getElementById('mathIntro').style.display='none';
+    document.getElementById('mathQuiz').style.display='none';
+    var rs=document.getElementById('mathResult');rs.style.display='block';
+    mathSetExit(true);
+    document.getElementById('mathScore').innerHTML='<b>'+right+' / '+math.qs.length+'</b><span class="pct">正确率 '+pct+'%</span><div class="result-stars">'+stars+'</div>';
+    var rv=document.getElementById('mathReview');rv.innerHTML='';
+    math.qs.forEach(function(q2,i2){
+      var mine=math.ans[i2],ok=mine===q2.ans;
+      var d=document.createElement('div');d.className='review-item';
+      d.innerHTML='<span class="rv-q">'+(i2+1)+'. '+q2.q+' = '+q2.ans+'</span>　你的答案：'+(ok?'<span class="rv-ok">'+mine+'</span>':'<span class="rv-no">'+mine+'</span>')+(ok?'':'　正确答案：<span class="rv-correct">'+q2.ans+'</span>');
+      rv.appendChild(d);
+    });
+    try{var _lr=JSON.parse(localStorage.getItem('xp_star_math')||'{"recs":[]}');_lr.recs.push({t:Date.now(),d:new Date().toISOString().slice(0,10),s:right,p:pct});if(_lr.recs.length>200)_lr.recs=_lr.recs.slice(-200);localStorage.setItem('xp_star_math',JSON.stringify(_lr))}catch(e){}
+    window.scrollTo(0,0);
+  }
+  function mathRecs(){try{var r=JSON.parse(localStorage.getItem('xp_star_math')||'{"recs":[]}');return r.recs||[]}catch(e){return[]}}
+  function renderMathStats(){
+    var recs=mathRecs();
+    var elT=document.getElementById('msTotal'),elB=document.getElementById('msBest'),elA=document.getElementById('msAvg'),el5=document.getElementById('msLast5');
+    if(!elT)return;
+    elT.textContent=recs.length;
+    if(!recs.length){
+      elB.textContent='–';elA.textContent='–';el5.textContent='–';
+      document.getElementById('msChartEmpty').style.display='block';
+      document.getElementById('msChart').style.display='none';
+      document.getElementById('msListEmpty').style.display='block';
+      document.getElementById('msList').innerHTML='';
+      document.getElementById('msClear').style.display='none';
+      return;
+    }
+    var best=Math.max.apply(null,recs.map(function(r){return r.s}));
+    var sum=recs.reduce(function(a,r){return a+r.s},0);
+    var avg=Math.round(sum/recs.length*10)/10;
+    var last5=recs.slice(-5),s5=last5.reduce(function(a,r){return a+r.s},0);
+    var avg5=Math.round(s5/last5.length*10)/10;
+    elB.textContent=best;elA.textContent=avg;el5.textContent=avg5;
+    document.getElementById('msChartEmpty').style.display='none';
+    var svg=document.getElementById('msChart');svg.style.display='block';
+    var W=420,H=190,PL=34,PR=12,PT=14,PB=26;
+    var n=recs.length,x0=PL,x1=W-PR,y0=H-PB,y1=PT;
+    var px=function(i){return n===1?(x0+x1)/2:x0+(x1-x0)*i/(n-1)};
+    var py=function(v){return y0-(y0-y1)*(Math.max(0,Math.min(10,v))/10)};
+    var grid='';
+    for(var g=0;g<=4;g++){var gy=y0-(y0-y1)*g/4,gv=Math.round(10*g/4);grid+='<line x1="'+x0+'" y1="'+gy+'" x2="'+x1+'" y2="'+gy+'" stroke="#EFE7D8" stroke-width="1"/><text x="'+(x0-6)+'" y="'+(gy+4)+'" text-anchor="end" font-size="10" fill="#B9AFA0">'+gv+'</text>'}
+    var pts=recs.map(function(r,i){return px(i)+','+py(r.s)});
+    var dots='';
+    for(var k=0;k<recs.length;k++){var x=px(k),y=py(recs[k].s);dots+='<circle cx="'+x+'" cy="'+y+'" r="3" fill="#F0A33C"/><text x="'+x+'" y="'+(y-7)+'" text-anchor="middle" font-size="9" fill="#7A6B52" font-weight="700">'+recs[k].s+'</text>'}
+    var avgY=py(avg);
+    var avgLine='<line x1="'+x0+'" y1="'+avgY+'" x2="'+x1+'" y2="'+avgY+'" stroke="#B07A10" stroke-dasharray="4 3" stroke-width="1"/><text x="'+(x1-2)+'" y="'+(avgY-3)+'" text-anchor="end" font-size="9" fill="#B07A10">均'+avg+'</text>';
+    svg.innerHTML=grid+avgLine+'<polyline points="'+pts.join(' ')+'" fill="none" stroke="#F0A33C" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'+dots;
+    var listEl=document.getElementById('msList'),listHtml='';
+    recs.slice(-10).reverse().forEach(function(r){
+      var idx=recs.indexOf(r),prev=idx>0?recs[idx-1].s:null;
+      var arrow=prev===null?'–':(r.s>prev?'<span class="up">↑</span>':(r.s<prev?'<span class="down">↓</span>':'<span class="flat">→</span>'));
+      var d=new Date(r.t),hm=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+      listHtml+='<div class="ls-row"><span class="t">'+r.d+' '+hm+'</span><span class="s">'+r.s+' / 10</span><span>'+r.p+'% '+arrow+'</span></div>';
+    });
+    listEl.innerHTML=listHtml;
+    document.getElementById('msListEmpty').style.display='none';
+    document.getElementById('msClear').style.display='inline-block';
+  }
+  function initMath(){
+    var box=document.getElementById('mathTypes');
+    var mkChip=function(label,val,on){
+      var b=document.createElement('button');
+      b.type='button';b.textContent=label;b.className=on?'on':'';
+      b.onclick=function(){mathSel=val;var bs=box.querySelectorAll('button');for(var k=0;k<bs.length;k++)bs[k].className=(bs[k]===b?'on':'')};
+      box.appendChild(b);
+    };
+    mkChip('综合',0,true);
+    MATH_TYPES.forEach(function(tp,i){mkChip(tp[1],i+1,false)});
+    var b1=document.getElementById('btnStartMath');
+    if(b1)b1.onclick=function(){document.getElementById('mathIntro').style.display='none';document.getElementById('mathStatsCard').style.display='none';document.getElementById('mathResult').style.display='none';document.getElementById('mathQuiz').style.display='block';startMath();mathSetExit(true)};
+    var pv=document.getElementById('mathPrev');
+    if(pv)pv.onclick=function(){if(math.cur>0){math.cur--;renderMath()}};
+    var nx=document.getElementById('mathNext');
+    if(nx)nx.onclick=function(){if(math.cur<math.qs.length-1){math.cur++;renderMath()}};
+    var inp=document.getElementById('mathInput');
+    if(inp)inp.oninput=function(){var v=parseInt(inp.value,10);math.ans[math.cur]=isNaN(v)?undefined:v};
+    var sb=document.getElementById('mathSubmit');
+    if(sb)sb.onclick=submitMath;
+    var ag=document.getElementById('mathAgain');
+    if(ag)ag.onclick=function(){document.getElementById('mathResult').style.display='none';document.getElementById('mathStatsCard').style.display='none';document.getElementById('mathQuiz').style.display='block';startMath()};
+    var showStats=function(){
+      document.getElementById('mathIntro').style.display='none';
+      document.getElementById('mathQuiz').style.display='none';
+      document.getElementById('mathResult').style.display='none';
+      document.getElementById('mathStatsCard').style.display='block';
+      renderMathStats();
+    };
+    var bms=document.getElementById('btnMathStats');
+    if(bms)bms.onclick=showStats;
+    var rms=document.getElementById('mathResultStats');
+    if(rms)rms.onclick=showStats;
+    var bk=document.getElementById('btnBackMath');
+    if(bk)bk.onclick=function(){location.hash='#learn';showPage()};
+    var clr=document.getElementById('msClear');
+    if(clr)clr.onclick=function(){if(confirm('确定清空口算练习记录吗？')){localStorage.removeItem('xp_star_math');renderMathStats()}};
+  }
+  initMath();
+  function initLearn(){
+    var b1=document.getElementById('btnStartLearn');
+    if(b1)b1.onclick=function(){document.getElementById('learnIntro').style.display='none';document.getElementById('mathIntroCard').style.display='none';document.getElementById('learnQuiz').style.display='block';startLearn();learnSetExit(true)};
+    var gm=document.getElementById('btnGoMath');
+    if(gm)gm.onclick=function(){
+      location.hash='#math';showPage();
+      document.getElementById('mathIntro').style.display='block';
+      document.getElementById('mathQuiz').style.display='none';
+      document.getElementById('mathResult').style.display='none';
+      document.getElementById('mathStatsCard').style.display='none';
+      mathSetExit(false);
+    };
+    var gms=document.getElementById('btnGoMathStats');
+    if(gms)gms.onclick=function(){location.hash='#math';showPage();document.getElementById('mathIntro').style.display='none';document.getElementById('mathQuiz').style.display='none';document.getElementById('mathResult').style.display='none';document.getElementById('mathStatsCard').style.display='block';renderMathStats()};
+    var pv=document.getElementById('learnPrev');
+    if(pv)pv.onclick=function(){if(learn.cur>0){learn.cur--;renderLearn()}};
+    var nx=document.getElementById('learnNext');
+    if(nx)nx.onclick=function(){if(learn.cur<learn.qs.length-1){learn.cur++;renderLearn()}};
+    var sb=document.getElementById('learnSubmit');
+    if(sb)sb.onclick=submitLearn;
+    var ag=document.getElementById('learnAgain');
+    if(ag)ag.onclick=function(){document.getElementById('learnResult').style.display='none';document.getElementById('learnIntro').style.display='block';document.getElementById('mathIntroCard').style.display='block';learnSetExit(false);window.scrollTo(0,0)};
+    var lsBtn=document.getElementById('btnLearnStats');
+    if(lsBtn)lsBtn.onclick=function(){location.hash='#learnStats';showPage()};
+    var rsBtn=document.getElementById('btnResultStats');
+    if(rsBtn)rsBtn.onclick=function(){location.hash='#learnStats';showPage()};
+    var bkLs=document.getElementById('btnBackLearnStats');
+    if(bkLs)bkLs.onclick=function(){location.hash='#learn';showPage()};
+    var clr=document.getElementById('btnClearStats');
+    if(clr)clr.onclick=function(){if(confirm('确定清空全部练习记录吗？')){localStorage.removeItem('xp_star_learn');renderLearnStats()}};
+  }
+  initLearn();
   showPage();
 })();
 </script>
