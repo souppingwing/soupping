@@ -1,4 +1,4 @@
-<!-- 成长小星球 · 待办奖惩系统 · 版本 v97（改前备份于 _backup/） -->
+<!-- 成长小星球 · 待办奖惩系统 · 版本 v103（改前备份于 _backup/） -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -40,7 +40,7 @@ body{
     linear-gradient(160deg,var(--bg1),var(--bg2));
   min-height:100vh; padding:20px 16px 60px; position:relative;
 }
-.wrap{max-width:1060px;margin:0 auto}
+.wrap{max-width:1280px;margin:0 auto}
 
 /* ===== Hero ===== */
 .hero{
@@ -680,7 +680,7 @@ body{
 .set-btn::after{content:"›";color:var(--sub);font-weight:800}
 .set-btn.danger{color:#D64541;border-color:#F6D6D2}
 .set-ver{text-align:center;font-size:11px;color:#B9AC9E;margin-top:12px}
-@media(max-width:768px){
+@media(max-width:1024px){
   body{padding:10px 0 60px}
   .wrap{max-width:100%;padding:10px 0 calc(72px + env(safe-area-inset-bottom))}
   .reset-line{display:none}
@@ -694,10 +694,11 @@ body{
   .m-tab.m-pet-tab.on svg{filter:drop-shadow(0 0 7px rgba(0,240,255,1))}
   @keyframes petSpin{to{transform:rotate(360deg)}}
   @keyframes petBreathe{0%,100%{box-shadow:0 0 10px rgba(0,240,255,.35),inset 0 0 12px rgba(0,240,255,.18)}50%{box-shadow:0 0 24px rgba(0,240,255,.7),inset 0 0 18px rgba(0,240,255,.32)}}
-  /* v41m12：独立 tab 页不再需要返回按钮 */
-  .stats-head{justify-content:center;text-align:center}
-  .stats-head:has(.btn-add){justify-content:flex-start;text-align:left}
-  .stats-head .btn-add{display:none}
+  /* v41m12：独立 tab 页不再需要返回按钮；v103：标题统一居中、缩小、与下方模块留间距 */
+  .stats-head{position:relative;justify-content:center;text-align:center}
+  .stats-head .btn-add{display:none;position:absolute;left:0;top:50%;transform:translateY(-50%)}
+  .stats-head h2{font-size:20px}
+  .stats-page{gap:32px}
   /* v60：非独立 tab 的二级页保留返回按钮（需返回上一级） */
   #learnStatsPage .stats-head .btn-add,
   #mathPage .stats-head .btn-add,
@@ -712,7 +713,7 @@ body{
   .m-tab svg{width:22px;height:22px}
   .m-tab span{font-size:11px;font-weight:800}
   .hero-inner{gap:10px}
-  .hero{padding:14px 12px 12px}
+  .hero{padding:12px 10px 10px}
   .hero .mascot{width:42px;height:42px}
   .hero-text h1{font-size:17px}
   .hero-text .tag{font-size:11px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -725,19 +726,19 @@ body{
   .stat span{font-size:11px}
   .stats-entry-row{gap:8px;margin-top:10px}
   .stats-entry{flex:1;text-align:center;padding:8px 6px;font-size:12.5px}
-  .grid{gap:12px;margin-top:12px}
-  .card{padding:14px}
+  .grid{gap:10px;margin-top:10px}
+  .card{padding:10px}
   .card-head h2{font-size:16px}
-  .btn-add{padding:8px 12px;font-size:13px}
-  .cal-day{min-height:42px;padding:3px;border-radius:9px;gap:2px}
+  .btn-add{padding:8px 10px;font-size:13px}
+  .cal-day{min-height:40px;padding:2px;border-radius:9px;gap:2px}
   .cal-day .dnum{font-size:12.5px}
   .cal-tag{font-size:8px;padding:1px 3px}
   .cal-week{gap:4px}
   .cal-week div{font-size:11px}
   .cal-grid{gap:4px}
-  .cal-nav .month{min-width:88px;font-size:15px}
+  .cal-nav .month{min-width:80px;font-size:14px}
   .cal-nav button{width:30px;height:30px;font-size:16px}
-  .item{padding:10px 8px;border-radius:12px}
+  .item{padding:8px 6px;border-radius:10px}
   .item .pts{font-size:14px}
   .rule-row{padding:10px}
   .rule-row .title{font-size:14.5px}
@@ -764,7 +765,7 @@ body{
 .cal-fold-arrow{display:none}
 .cal-fold-line{display:none}
 #mListCover .modal{max-width:520px}
-@media(max-width:768px){
+@media(max-width:1024px){
   .hide-m{display:none!important}
   .hero-stats.month{display:none!important}
   .stats-entry-row{display:none!important}
@@ -782,7 +783,7 @@ body{
   #calCard.fold .cal-fold-line{display:block}
   #calCard.fold .cal-body{display:none}
   #calCard.fold .cal-head{cursor:pointer}
-  .grid{display:flex!important;flex-direction:column}
+  .grid{display:flex!important;flex-direction:column;align-items:stretch}
   #calCard{order:1}
   #taskSection{order:2}
   #mQuick{order:3}
@@ -845,6 +846,16 @@ body::after{content:"";position:fixed;right:-70px;bottom:-55px;width:230px;heigh
 .item .sub{opacity:.78}
 .act-btn.e-edit{background:#DCEBFF;color:#1B63C9;box-shadow:0 3px 0 #B9D6F2}
 .act-btn.e-del{background:#FFE2DE;color:#C7433D;box-shadow:0 3px 0 #F2C0B8}
+/* v103：操作密码锁（仅 PC 端） */
+.lock-cover{position:fixed;inset:0;z-index:99999;background:rgba(246,240,231,.97);display:flex;align-items:center;justify-content:center}
+.lock-card{background:#fff;border-radius:18px;padding:28px 32px;width:320px;max-width:88vw;box-shadow:0 10px 34px rgba(0,0,0,.14);text-align:center}
+.lock-ico{width:46px;height:46px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,#FFD6A5,#FFB4A2);display:flex;align-items:center;justify-content:center}
+.lock-card h3{margin:10px 0 4px;font-size:18px;color:#5B4A3F}
+.lock-card p{margin:0 0 14px;font-size:13px;color:#9A8C80;line-height:1.5}
+.lock-card input{width:100%;box-sizing:border-box;padding:10px 12px;border:2px solid #F0E6DA;border-radius:12px;font-size:15px;text-align:center;outline:none}
+.lock-card input:focus{border-color:#FFB4A2}
+.lock-msg{min-height:18px;font-size:12px;color:#D64541;margin-top:6px}
+.lock-card .btn{margin-top:10px;width:100%}
 </style>
 <script>
 console.warn('Scripts "build/three.js" and "build/three.min.js" are deprecated with r150+, and will be removed with r160. Please use ES Modules or alternatives: https://threejs.org/docs/index.html#manual/en/introduction/Installation'),
@@ -1067,6 +1078,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     <button class="link-btn" id="btnPetSwitch">宠物：小狗</button>
     <button class="link-btn" id="btnProfile">宝宝档案</button>
     <button class="link-btn" id="btnCat">管理分类</button>
+    <button class="link-btn" id="btnSettingsD">设置</button>
     <button class="link-btn" id="btnExport">导出备份</button>
     <button class="link-btn" id="btnImport">导入备份</button>
     <button class="link-btn" id="btnReset">清空所有数据，重新开始</button>
@@ -1074,7 +1086,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   </div>
   </div><!-- /homeView -->
 
-  <!-- ===== 手机端底部导航（≤768px 显示） ===== -->
+  <!-- ===== 手机端底部导航（≤1024px 显示） ===== -->
   <nav class="m-tabbar" id="tabbar">
     <button type="button" class="m-tab on" id="tabToday">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16v12H4z"/><path d="M4 13h16"/><path d="M8 4v4M16 4v4"/></svg>
@@ -1097,6 +1109,19 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
       <span>设置</span>
     </button>
   </nav>
+
+  <!-- ===== v103：操作密码锁（仅 PC 端显示，打印清单不受限） ===== -->
+  <div class="lock-cover" id="lockCover" style="display:none">
+    <div class="lock-card">
+      <div class="lock-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+      <h3>操作已锁定</h3>
+      <p>输入操作密码后可使用页面（打印清单无需密码）</p>
+      <input type="password" id="lockPinInp" maxlength="20" placeholder="请输入操作密码" autocomplete="off">
+      <div class="lock-msg" id="lockMsg"></div>
+      <button type="button" class="btn primary" id="lockPinOk">解锁</button>
+      <button type="button" class="btn ghost" id="lockPrint">打印清单</button>
+    </div>
+  </div>
 
   <!-- ===== 设置中心（手机端集中入口） ===== -->
   <div class="modal-cover" id="settingsCover">
@@ -1137,6 +1162,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
           <input class="set-inp" id="giteeName" placeholder="同步账号名，如 baby（决定数据文件）">
           <div class="set-btns">
             <button type="button" class="set-btn" id="giteeSave">保存并同步</button>
+            <button type="button" class="set-btn" id="downloadNow">从云端下载数据</button>
             <button type="button" class="set-btn danger" id="giteeClear">清除</button>
           </div>
           <div class="set-lbl" id="giteeStatus" style="min-height:18px"></div>
@@ -1160,6 +1186,16 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
           </div>
         </div>
         <div class="set-tip" id="syncMsg"></div>
+      </div>
+      <div class="set-group" id="pinGroup"><div class="set-title">操作密码（仅 PC 端）</div>
+        <input class="set-inp" id="pinNew" type="password" placeholder="设置新密码（至少 4 位）">
+        <input class="set-inp" id="pinNew2" type="password" placeholder="再次输入新密码">
+        <div class="set-btns">
+          <button type="button" class="set-btn" id="pinSave">保存密码</button>
+          <button type="button" class="set-btn" id="pinLockNow">立即锁定</button>
+          <button type="button" class="set-btn danger" id="pinClear">清除密码</button>
+        </div>
+        <div class="set-lbl" id="pinStatus" style="min-height:18px"></div>
       </div>
       <div class="modal-actions"><button type="button" class="btn ghost" id="setCancel">关闭</button></div>
       <div class="set-ver">成长小星球 v41 · 数据保存在本机浏览器</div>
@@ -2249,7 +2285,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
 
   function render(){
     var savedScr=0;
-    if(window.innerWidth<=768)savedScr=window.pageYOffset||document.documentElement.scrollTop||0;
+    if(window.innerWidth<=1024)savedScr=window.pageYOffset||document.documentElement.scrollTop||0;
     renderProfile();checkBadges();renderLevel();renderBadges();renderPoints();renderCal();renderTasks();renderRewards();renderRules();renderPenalties();renderLog();renderPet();renderMonthRank();
     maybeOpenMandate();updateCalFold&&updateCalFold();
     // 手机端：列表重绘后恢复原滚动位置（处理/添加/撤销待办时页面不跳顶）
@@ -3306,7 +3342,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
       else tagText='仅'+t.date;
       var cat=catById(t.cat);
       var catHtml=cat?'<span class="cat-tag" style="background:'+cat.color+'">'+esc(cat.name)+'</span>':'';
-      var subNote=(t.subs&&t.subs.length)?(window.innerWidth<=768?'':'，总分 +'+t.pts+'，子待办 '+t.subs.map(function(s){return s.name+' +'+s.pts}).join('／')):'';
+      var subNote=(t.subs&&t.subs.length)?(window.innerWidth<=1024?'':'，总分 +'+t.pts+'，子待办 '+t.subs.map(function(s){return s.name+' +'+s.pts}).join('／')):'';
       var tutorHtml=t.tutor?'<span class="tutor-tag tp">【补习课】</span>':(t.lessonId?'<span class="tutor-tag">【课程】</span>':'');
       var remainN=t.tutor?(' · 剩余 '+tRemain(t)+' 节'):'';
       var lessonNote=t.lessonId?' · 上课扣'+lessonNOf(t,ds)+'节':'';
@@ -5628,13 +5664,13 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   setType('once');
   save();render();
   // v41m10：手机端宠物卡移入独立宠物页
-  if(window.innerWidth<=768){
+  if(window.innerWidth<=1024){
     var petCardEl=document.querySelector('.pet-card');
     var petBody=document.getElementById('petPageBody');
     if(petCardEl&&petBody)petBody.appendChild(petCardEl);
   }
   // v41m14：手机端设置弹窗内容移入独立设置页
-  if(window.innerWidth<=768){
+  if(window.innerWidth<=1024){
     var setModalEl=document.querySelector('#settingsCover .modal');
     var setBodyEl=document.getElementById('settingsPageBody');
     if(setModalEl&&setBodyEl)setBodyEl.appendChild(setModalEl);
@@ -5742,6 +5778,10 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   }
   var syncT=null;
   function syncPush(){
+    if(IS_REAL_MOBILE){
+      var lm0=state&&state._meta;
+      if(!lm0||typeof lm0.lastMod!=='number'||lm0.lastMod<=0){syncMsg('本地暂无数据，请先在设置中「从云端下载数据」');return}
+    }
     if(SYNC.mode==='gitee'){
       if(GITEED.token&&GITEED.repo&&GITEED.name){
         clearTimeout(syncT);
@@ -5852,6 +5892,11 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   }
   function syncBoot(){
     syncUI();
+    lockUI();pinUI();
+    if(IS_REAL_MOBILE){
+      // v103：手机端只上传不下载——打开时不自动同步，需手动在设置中「从云端下载数据」
+      return;
+    }
     if(SYNC.mode==='gitee'){
       syncAuto();
       return;
@@ -5901,7 +5946,13 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     if(SYNC.token)syncApi('/api/logout','POST',{token:SYNC.token});
     SYNC.token='';SYNC.username='';syncSave();syncUI();syncMsg('已退出登录',1);
   };
-  if(syncNow)syncNow.onclick=function(){syncAuto()};
+  if(syncNow)syncNow.onclick=function(){
+    if(IS_REAL_MOBILE){
+      if(!(GITEED.token&&GITEED.repo&&GITEED.name)){syncMsg('未配置同步账号，请先填写令牌/仓库/账号名');return}
+      syncMsg('正在上传到云端...');
+      giteePut().then(function(r){syncMsg(r&&r.ok?'已上传到云端':(r&&r.msg?r.msg:'上传失败'),r&&r.ok)});
+    }else{syncAuto()}
+  };
   if(syncModeSel)syncModeSel.onchange=function(){SYNC.mode=syncModeSel.value;syncSave();syncUI()};
   var giteeSaveBtn=document.getElementById('giteeSave');
   var giteeClearBtn=document.getElementById('giteeClear');
@@ -5927,6 +5978,72 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     var n=document.getElementById('giteeName');
     if(t)t.value='';if(r)r.value='';if(n)n.value='';
     syncUI();syncMsg('已清除同步配置',1);
+  };
+  // ===== v103/v103：PC 端操作密码锁 =====
+  var IS_REAL_MOBILE=/Android|iPhone|iPad|iPod|Windows Phone|HarmonyOS/i.test(navigator.userAgent||'');
+  var PIN=localStorage.getItem('xp_star_pin')||'';
+  function setPinMsg(t,ok){var el=document.getElementById('pinStatus');if(el){el.textContent=t;el.style.color=ok?'#3A9D52':'#D64541'}}
+  function lockUI(){
+    var lc=document.getElementById('lockCover');if(!lc)return;
+    var need=!IS_REAL_MOBILE&&PIN&&sessionStorage.getItem('xp_star_pin_unlocked')!=='1';
+    lc.style.display=need?'flex':'none';
+    if(!need){var m=document.getElementById('lockMsg');if(m)m.textContent=''}
+  }
+  function pinUI(){
+    var g=document.getElementById('pinGroup');if(g)g.style.display=IS_REAL_MOBILE?'none':'';
+    var st=document.getElementById('pinStatus');
+    if(st)st.textContent=PIN?('已设置操作密码'+(sessionStorage.getItem('xp_star_pin_unlocked')==='1'?'（已解锁）':'（已锁定）')):'未设置操作密码（设置后 PC 端需密码才能操作）';
+  }
+  function pinTryUnlock(){
+    var el=document.getElementById('lockPinInp'),m=document.getElementById('lockMsg');
+    if(!el)return;
+    if(el.value===PIN){sessionStorage.setItem('xp_star_pin_unlocked','1');el.value='';lockUI();if(m)m.textContent=''}
+    else{if(m){m.textContent='密码错误，请重试';m.style.color='#D64541'}el.value=''}
+  }
+  var lockOk=document.getElementById('lockPinOk');
+  if(lockOk)lockOk.onclick=pinTryUnlock;
+  var lockInp=document.getElementById('lockPinInp');
+  if(lockInp)lockInp.onkeydown=function(e){if(e.key==='Enter')pinTryUnlock()};
+  var lockPrint=document.getElementById('lockPrint');
+  if(lockPrint)lockPrint.onclick=function(){renderPrintView();setTimeout(function(){window.print()},80)};
+  var pinSaveBtn=document.getElementById('pinSave');
+  if(pinSaveBtn)pinSaveBtn.onclick=function(){
+    var a=document.getElementById('pinNew').value,b=document.getElementById('pinNew2').value;
+    if(!a&&!b){setPinMsg('请输入新密码');return}
+    if(a!==b){setPinMsg('两次输入的密码不一致');return}
+    if(a.length<4){setPinMsg('密码至少 4 位');return}
+    localStorage.setItem('xp_star_pin',a);PIN=a;
+    sessionStorage.setItem('xp_star_pin_unlocked','1');
+    document.getElementById('pinNew').value='';document.getElementById('pinNew2').value='';
+    setPinMsg('操作密码已保存（本会话已解锁）',1);pinUI();lockUI();
+  };
+  var pinLockBtn=document.getElementById('pinLockNow');
+  if(pinLockBtn)pinLockBtn.onclick=function(){
+    if(!PIN){setPinMsg('请先保存密码再锁定');return}
+    sessionStorage.removeItem('xp_star_pin_unlocked');
+    pinUI();lockUI();
+    if(!IS_REAL_MOBILE)setPinMsg('已锁定，需输入密码才能操作',1);
+  };
+  var pinClearBtn=document.getElementById('pinClear');
+  if(pinClearBtn)pinClearBtn.onclick=function(){
+    if(!confirm('确定清除操作密码吗？'))return;
+    localStorage.removeItem('xp_star_pin');PIN='';sessionStorage.removeItem('xp_star_pin_unlocked');
+    document.getElementById('pinNew').value='';document.getElementById('pinNew2').value='';
+    setPinMsg('已清除操作密码',1);pinUI();lockUI();
+  };
+  window.addEventListener('resize',function(){lockUI();pinUI()});
+  var btnSettingsD=document.getElementById('btnSettingsD');
+  if(btnSettingsD)btnSettingsD.onclick=function(){document.getElementById('settingsCover').classList.add('show')};
+  var downloadNow=document.getElementById('downloadNow');
+  if(downloadNow)downloadNow.onclick=function(){
+    if(SYNC.mode!=='gitee'){syncMsg('仅 Gitee 模式支持从云端下载');return}
+    if(!(GITEED.token&&GITEED.repo&&GITEED.name)){syncMsg('未配置同步账号，请先填写令牌/仓库/账号名');return}
+    syncMsg('正在从云端下载...');
+    giteeGet().then(function(r){
+      if(r&&r.ok&&r.data){applyCloud(r.data);syncMsg('已从云端下载并覆盖本机数据',1)}
+      else if(r&&r.ok){syncMsg('云端暂无数据',0)}
+      else if(r&&r.msg){syncMsg(r.msg)}
+    });
   };
   syncBoot();
   document.getElementById('setProfile').onclick=function(){settingsCover.classList.remove('show');openProfile()};
@@ -5974,7 +6091,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
       _statsHost=null;_mOnClose=null;
     };
   }
-  function isMobile(){return window.innerWidth<=768}
+  function isMobile(){return window.innerWidth<=1024}
   function foldCal(){if(calCardEl){calCardEl.classList.add('fold');calCardEl.classList.remove('open')}}
   function openCal(){if(calCardEl){calCardEl.classList.remove('fold');calCardEl.classList.add('open')}}
   function updateCalFold(){
@@ -5986,11 +6103,11 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   if(isMobile())foldCal();else openCal();
   updateCalFold();
   function applyVer(){
-    var m=window.innerWidth<=768;
+    var m=window.innerWidth<=1024;
     var vt=document.getElementById('verTag');
-    if(vt)vt.textContent=m?'mobile v97 第1版':'v97';
+    if(vt)vt.textContent=m?'mobile v103 第1版':'v103';
     var sv=document.querySelector('.set-ver');
-    if(sv)sv.textContent=m?'成长小星球 mobile v97 第1版 · 数据保存在本机浏览器':'成长小星球 v97 · 数据保存在本机浏览器';
+    if(sv)sv.textContent=m?'成长小星球 mobile v103 第1版 · 数据保存在本机浏览器':'成长小星球 v103 · 数据保存在本机浏览器';
   }
   applyVer();
   function openRuleList(){
@@ -6029,7 +6146,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   document.getElementById('penCover').onclick=function(e){if(e.target===document.getElementById('penCover'))document.getElementById('penCover').classList.remove('show')};
   document.getElementById('bClose').onclick=function(){document.getElementById('bCover').classList.remove('show')};
   document.getElementById('bCover').onclick=function(e){if(e.target===document.getElementById('bCover'))document.getElementById('bCover').classList.remove('show')};
-  // ===== 学习系统（v97） =====
+  // ===== 学习系统（v103） =====
   var PY_BANK=[
     {w:'我',py:'wǒ',sm:'w',ym:'o'},{w:'你',py:'nǐ',sm:'n',ym:'i'},{w:'他',py:'tā',sm:'t',ym:'a'},
     {w:'大',py:'dà',sm:'d',ym:'a'},{w:'小',py:'xiǎo',sm:'x',ym:'iao'},{w:'山',py:'shān',sm:'sh',ym:'an'},
