@@ -1,4 +1,4 @@
-<!-- 成长小星球 · 待办奖惩系统 · 版本 v96（改前备份于 _backup/） -->
+<!-- 成长小星球 · 待办奖惩系统 · 版本 v97（改前备份于 _backup/） -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -5988,9 +5988,9 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   function applyVer(){
     var m=window.innerWidth<=768;
     var vt=document.getElementById('verTag');
-    if(vt)vt.textContent=m?'mobile v96 第1版':'v96';
+    if(vt)vt.textContent=m?'mobile v97 第1版':'v97';
     var sv=document.querySelector('.set-ver');
-    if(sv)sv.textContent=m?'成长小星球 mobile v96 第1版 · 数据保存在本机浏览器':'成长小星球 v96 · 数据保存在本机浏览器';
+    if(sv)sv.textContent=m?'成长小星球 mobile v97 第1版 · 数据保存在本机浏览器':'成长小星球 v97 · 数据保存在本机浏览器';
   }
   applyVer();
   function openRuleList(){
@@ -6029,7 +6029,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   document.getElementById('penCover').onclick=function(e){if(e.target===document.getElementById('penCover'))document.getElementById('penCover').classList.remove('show')};
   document.getElementById('bClose').onclick=function(){document.getElementById('bCover').classList.remove('show')};
   document.getElementById('bCover').onclick=function(e){if(e.target===document.getElementById('bCover'))document.getElementById('bCover').classList.remove('show')};
-  // ===== 学习系统（v96） =====
+  // ===== 学习系统（v97） =====
   var PY_BANK=[
     {w:'我',py:'wǒ',sm:'w',ym:'o'},{w:'你',py:'nǐ',sm:'n',ym:'i'},{w:'他',py:'tā',sm:'t',ym:'a'},
     {w:'大',py:'dà',sm:'d',ym:'a'},{w:'小',py:'xiǎo',sm:'x',ym:'iao'},{w:'山',py:'shān',sm:'sh',ym:'an'},
@@ -6072,6 +6072,11 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   function pyDistinct(arr){var o={},r=[];for(var i=0;i<arr.length;i++){if(!o[arr[i]]){o[arr[i]]=1;r.push(arr[i])}}return r}
   function pyYmdai(item){return item.sm?item.py.slice(item.sm.length):item.py}
   var learn={qs:[],cur:0,ans:[]};
+  // ---- 子视图返回栈：每进入一层练习压一条历史，返回键逐级回退 ----
+  window.__subStack=[];
+  function __pushSub(restore){__subStack.push(restore);try{history.pushState({s:1},'')}catch(e){}}
+  function __subPop(){if(!__subStack.length)return false;var r=__subStack.pop();try{r()}catch(e){}return true}
+  window.addEventListener('popstate',function(){__subPop()});
   function startLearn(){
     var singles=PY_BANK.filter(function(x){return x.sm});
     var sSel=pyShuffle(singles.slice()).slice(0,6);
@@ -6146,6 +6151,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         document.getElementById('mathIntroCard').style.display='block';
         document.getElementById('wordIntroCard').style.display='block';
         learnSetExit(false);
+        __subPop();try{history.back()}catch(e){}
       };
       if(lt)lt.style.display='none';
     }else{
@@ -6167,6 +6173,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         document.getElementById('mathStatsCard').style.display='none';
         document.getElementById('mathIntro').style.display='block';
         mathSetExit(false);
+        __subPop();try{history.back()}catch(e){}
       };
       if(mt)mt.style.display='none';
     }else{
@@ -6369,7 +6376,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     mkChip('综合',0,true);
     MATH_TYPES.forEach(function(tp,i){mkChip(tp[1],i+1,false)});
     var b1=document.getElementById('btnStartMath');
-    if(b1)b1.onclick=function(){document.getElementById('mathIntro').style.display='none';document.getElementById('mathStatsCard').style.display='none';document.getElementById('mathResult').style.display='none';document.getElementById('mathQuiz').style.display='block';startMath();mathSetExit(true)};
+    if(b1)b1.onclick=function(){document.getElementById('mathIntro').style.display='none';document.getElementById('mathStatsCard').style.display='none';document.getElementById('mathResult').style.display='none';document.getElementById('mathQuiz').style.display='block';startMath();mathSetExit(true);__pushSub(function(){document.getElementById('mathQuiz').style.display='none';document.getElementById('mathResult').style.display='none';document.getElementById('mathStatsCard').style.display='none';document.getElementById('mathIntro').style.display='block';mathSetExit(false)})};
     var pv=document.getElementById('mathPrev');
     if(pv)pv.onclick=function(){if(math.cur>0){math.cur--;renderMath()}};
     var nx=document.getElementById('mathNext');
@@ -6597,7 +6604,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     if(on){
       bk.textContent='← 退出练习';
       bk.style.display='inline-block';
-      bk.onclick=function(){showWordIntro()};
+      bk.onclick=function(){showWordIntro();__subPop();try{history.back()}catch(e){}};
       if(wt)wt.style.display='none';
     }else{
       bk.textContent='← 返回学习';
@@ -6666,6 +6673,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     document.getElementById('wordResult').style.display='none';
     document.getElementById('wordLkQuiz').style.display='block';
     wordSetExit(true);
+    __pushSub(showWordIntro);
     renderLk();
   }
   function lkRemain(){return word.pool.filter(function(w){return !word.broken[w.w]&&(word.prog[w.w]||0)<w.syls.length})}
@@ -6940,12 +6948,13 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     document.getElementById('wordResult').style.display='none';
     document.getElementById('wordQuiz').style.display='block';
     wordSetExit(true);
+    __pushSub(showWordIntro);
     renderWord();
   }
   initWord();
   function initLearn(){
     var b1=document.getElementById('btnStartLearn');
-    if(b1)b1.onclick=function(){document.getElementById('learnIntro').style.display='none';document.getElementById('mathIntroCard').style.display='none';document.getElementById('wordIntroCard').style.display='none';document.getElementById('learnQuiz').style.display='block';startLearn();learnSetExit(true)};
+    if(b1)b1.onclick=function(){document.getElementById('learnIntro').style.display='none';document.getElementById('mathIntroCard').style.display='none';document.getElementById('wordIntroCard').style.display='none';document.getElementById('learnQuiz').style.display='block';startLearn();learnSetExit(true);__pushSub(function(){document.getElementById('learnQuiz').style.display='none';document.getElementById('learnResult').style.display='none';document.getElementById('learnIntro').style.display='block';document.getElementById('mathIntroCard').style.display='block';document.getElementById('wordIntroCard').style.display='block';learnSetExit(false)})};
     var gm=document.getElementById('btnGoMath');
     if(gm)gm.onclick=function(){
       location.hash='#math';showPage();
@@ -6964,7 +6973,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     var sb=document.getElementById('learnSubmit');
     if(sb)sb.onclick=submitLearn;
     var ag=document.getElementById('learnAgain');
-    if(ag)ag.onclick=function(){document.getElementById('learnResult').style.display='none';document.getElementById('learnIntro').style.display='block';document.getElementById('mathIntroCard').style.display='block';document.getElementById('wordIntroCard').style.display='block';learnSetExit(false);window.scrollTo(0,0)};
+    if(ag)ag.onclick=function(){document.getElementById('learnResult').style.display='none';document.getElementById('learnIntro').style.display='block';document.getElementById('mathIntroCard').style.display='block';document.getElementById('wordIntroCard').style.display='block';learnSetExit(false);__subPop();window.scrollTo(0,0)};
     var lsBtn=document.getElementById('btnLearnStats');
     if(lsBtn)lsBtn.onclick=function(){location.hash='#learnStats';showPage()};
     var rsBtn=document.getElementById('btnResultStats');
