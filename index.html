@@ -1,4 +1,4 @@
-<!-- 成长小星球 · 待办奖惩系统 · 版本 v103（改前备份于 _backup/） -->
+<!-- 成长小星球 · 待办奖惩系统 · 版本 v108（改前备份于 _backup/） -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -694,8 +694,8 @@ body{
   .m-tab.m-pet-tab.on svg{filter:drop-shadow(0 0 7px rgba(0,240,255,1))}
   @keyframes petSpin{to{transform:rotate(360deg)}}
   @keyframes petBreathe{0%,100%{box-shadow:0 0 10px rgba(0,240,255,.35),inset 0 0 12px rgba(0,240,255,.18)}50%{box-shadow:0 0 24px rgba(0,240,255,.7),inset 0 0 18px rgba(0,240,255,.32)}}
-  /* v41m12：独立 tab 页不再需要返回按钮；v103：标题统一居中、缩小、与下方模块留间距 */
-  .stats-head{position:relative;justify-content:center;text-align:center}
+  /* v41m12：独立 tab 页不再需要返回按钮；v108：标题统一居中、缩小、与下方模块留间距 */
+  .stats-head{position:relative;justify-content:center;text-align:center;min-height:44px}
   .stats-head .btn-add{display:none;position:absolute;left:0;top:50%;transform:translateY(-50%)}
   .stats-head h2{font-size:20px}
   .stats-page{gap:32px}
@@ -846,7 +846,7 @@ body::after{content:"";position:fixed;right:-70px;bottom:-55px;width:230px;heigh
 .item .sub{opacity:.78}
 .act-btn.e-edit{background:#DCEBFF;color:#1B63C9;box-shadow:0 3px 0 #B9D6F2}
 .act-btn.e-del{background:#FFE2DE;color:#C7433D;box-shadow:0 3px 0 #F2C0B8}
-/* v103：操作密码锁（仅 PC 端） */
+/* v108：操作密码锁（仅 PC 端） */
 .lock-cover{position:fixed;inset:0;z-index:99999;background:rgba(246,240,231,.97);display:flex;align-items:center;justify-content:center}
 .lock-card{background:#fff;border-radius:18px;padding:28px 32px;width:320px;max-width:88vw;box-shadow:0 10px 34px rgba(0,0,0,.14);text-align:center}
 .lock-ico{width:46px;height:46px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,#FFD6A5,#FFB4A2);display:flex;align-items:center;justify-content:center}
@@ -856,6 +856,15 @@ body::after{content:"";position:fixed;right:-70px;bottom:-55px;width:230px;heigh
 .lock-card input:focus{border-color:#FFB4A2}
 .lock-msg{min-height:18px;font-size:12px;color:#D64541;margin-top:6px}
 .lock-card .btn{margin-top:10px;width:100%}
+
+.btn.off{opacity:.45;filter:grayscale(.5);cursor:not-allowed}
+/* v104/v108：口算手写板 */
+.pad-box{margin:12px 0 2px;border:1.5px dashed #C9B896;border-radius:12px;padding:8px;background:#FFFDF6}
+.pad-tip{font-size:12px;color:#9A8C7A;margin-bottom:6px;text-align:center}
+.pad-foot{display:flex;gap:10px;justify-content:center;margin-top:8px}
+.pad-btn{border:1px solid #C9B896;background:#fff;border-radius:10px;padding:8px 22px;font-size:14px;font-weight:700;color:#8A7A60;cursor:pointer}
+.pad-btn.primary{background:#5B8DEF;color:#fff;border-color:#5B8DEF}
+#padCanvas{width:100%;height:150px;background:#fff;border-radius:8px;touch-action:none;display:block;cursor:crosshair}
 </style>
 <script>
 console.warn('Scripts "build/three.js" and "build/three.min.js" are deprecated with r150+, and will be removed with r160. Please use ES Modules or alternatives: https://threejs.org/docs/index.html#manual/en/introduction/Installation'),
@@ -1110,7 +1119,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     </button>
   </nav>
 
-  <!-- ===== v103：操作密码锁（仅 PC 端显示，打印清单不受限） ===== -->
+  <!-- ===== v108：操作密码锁（仅 PC 端显示，打印清单不受限） ===== -->
   <div class="lock-cover" id="lockCover" style="display:none">
     <div class="lock-card">
       <div class="lock-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
@@ -1358,6 +1367,14 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         <button class="btn alt" id="mathNext">下一题</button>
         <button class="btn primary" id="mathSubmit" style="display:none">提交答卷</button>
       </div>
+      <div class="pad-box" id="padBox">
+        <div class="pad-tip">手写数字（逐位写，全部写完后点"识别填入"）</div>
+        <canvas id="padCanvas" width="600" height="260"></canvas>
+        <div class="pad-foot">
+          <button type="button" class="pad-btn" id="padClear">重写</button>
+          <button type="button" class="pad-btn primary" id="padRecognize">识别填入</button>
+        </div>
+      </div>
     </section>
     <section class="card" id="mathResult" style="display:none">
       <div class="result-score" id="mathScore"></div>
@@ -1411,7 +1428,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         <span class="learn-type-tag" id="lkPoints">得分 0</span>
       </div>
       <div class="word-built" id="lkBuilt"></div>
-      <div style="text-align:center;margin-top:8px"><button class="btn primary" id="lkFinishBtn" style="display:none">完成这个词</button></div>
+      <div style="text-align:center;margin-top:8px;min-height:52px;display:flex;align-items:center;justify-content:center"><button class="btn primary off" id="lkFinishBtn" disabled>完成这个词</button></div>
       <div class="lk-grid" id="lkGrid"></div>
       <div class="learn-nav">
         <button class="btn alt" id="lkQuit">退出练习</button>
@@ -5894,7 +5911,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     syncUI();
     lockUI();pinUI();
     if(IS_REAL_MOBILE){
-      // v103：手机端只上传不下载——打开时不自动同步，需手动在设置中「从云端下载数据」
+      // v108：手机端只上传不下载——打开时不自动同步，需手动在设置中「从云端下载数据」
       return;
     }
     if(SYNC.mode==='gitee'){
@@ -5979,7 +5996,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     if(t)t.value='';if(r)r.value='';if(n)n.value='';
     syncUI();syncMsg('已清除同步配置',1);
   };
-  // ===== v103/v103：PC 端操作密码锁 =====
+  // ===== v108/v108：PC 端操作密码锁 =====
   var IS_REAL_MOBILE=/Android|iPhone|iPad|iPod|Windows Phone|HarmonyOS/i.test(navigator.userAgent||'');
   var PIN=localStorage.getItem('xp_star_pin')||'';
   function setPinMsg(t,ok){var el=document.getElementById('pinStatus');if(el){el.textContent=t;el.style.color=ok?'#3A9D52':'#D64541'}}
@@ -6105,9 +6122,9 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   function applyVer(){
     var m=window.innerWidth<=1024;
     var vt=document.getElementById('verTag');
-    if(vt)vt.textContent=m?'mobile v103 第1版':'v103';
+    if(vt)vt.textContent=m?'mobile v108 第1版':'v108';
     var sv=document.querySelector('.set-ver');
-    if(sv)sv.textContent=m?'成长小星球 mobile v103 第1版 · 数据保存在本机浏览器':'成长小星球 v103 · 数据保存在本机浏览器';
+    if(sv)sv.textContent=m?'成长小星球 mobile v108 第1版 · 数据保存在本机浏览器':'成长小星球 v108 · 数据保存在本机浏览器';
   }
   applyVer();
   function openRuleList(){
@@ -6146,7 +6163,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   document.getElementById('penCover').onclick=function(e){if(e.target===document.getElementById('penCover'))document.getElementById('penCover').classList.remove('show')};
   document.getElementById('bClose').onclick=function(){document.getElementById('bCover').classList.remove('show')};
   document.getElementById('bCover').onclick=function(e){if(e.target===document.getElementById('bCover'))document.getElementById('bCover').classList.remove('show')};
-  // ===== 学习系统（v103） =====
+  // ===== 学习系统（v108） =====
   var PY_BANK=[
     {w:'我',py:'wǒ',sm:'w',ym:'o'},{w:'你',py:'nǐ',sm:'n',ym:'i'},{w:'他',py:'tā',sm:'t',ym:'a'},
     {w:'大',py:'dà',sm:'d',ym:'a'},{w:'小',py:'xiǎo',sm:'x',ym:'iao'},{w:'山',py:'shān',sm:'sh',ym:'an'},
@@ -6255,6 +6272,63 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     document.getElementById('learnNext').style.display=isLast?'none':'inline-block';
     document.getElementById('learnSubmit').style.display=isLast?'inline-block':'none';
   }
+
+/* v108：口算手写板 + 单数字识别 */
+(function(){
+  var cv=document.getElementById('padCanvas');if(!cv)return;
+  var ctx=cv.getContext('2d'),drawing=false,last=null;
+  function pos(e){var r=cv.getBoundingClientRect();var t=e.touches?e.touches[0]:e;return{x:(t.clientX-r.left)*cv.width/r.width,y:(t.clientY-r.top)*cv.height/r.height};}
+  function start(e){drawing=true;last=pos(e);e.preventDefault();}
+  function move(e){if(!drawing)return;var p=pos(e);ctx.strokeStyle='#333';ctx.lineWidth=14;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();last=p;e.preventDefault();}
+  function end(){drawing=false;}
+  cv.addEventListener('mousedown',start);cv.addEventListener('mousemove',move);window.addEventListener('mouseup',end);
+  cv.addEventListener('touchstart',start,{passive:false});cv.addEventListener('touchmove',move,{passive:false});cv.addEventListener('touchend',end);
+  function clearPad(){ctx.clearRect(0,0,cv.width,cv.height);}
+  document.getElementById('padClear').onclick=clearPad;
+  var pr=document.getElementById('padRecognize');if(pr)pr.onclick=recognize;
+  /* 手写标准 3x3 密度模板（0-9，前 9 维为 3x3 网格密度） */
+  var TPL=[
+    [.9,.9,.9,.9,.1,.9,.9,.1,.9,.9,.1,.9,.9,.1,.9,.9,.9,.9], /* 0 */
+    [.3,.5,.9,.1,.3,.9,.1,.3,.9,.1,.3,.9,.1,.3,.9,.1,.3,.9], /* 1 */
+    [.9,.9,.9,.1,.1,.9,.1,.3,.9,.9,.9,.6,.9,.3,.1,.9,.9,.9], /* 2 */
+    [.9,.9,.9,.1,.1,.9,.1,.3,.6,.1,.1,.9,.1,.3,.9,.9,.9,.9], /* 3 */
+    [.9,.3,.9,.9,.3,.9,.9,.3,.9,.9,.9,.9,.1,.1,.9,.1,.1,.9], /* 4 */
+    [.9,.9,.9,.9,.1,.1,.9,.9,.6,.1,.1,.9,.1,.3,.9,.9,.9,.9], /* 5 */
+    [.9,.9,.9,.9,.1,.1,.9,.9,.6,.9,.1,.9,.9,.1,.9,.9,.9,.9], /* 6 */
+    [.9,.9,.9,.1,.1,.9,.1,.3,.6,.1,.1,.3,.1,.1,.3,.1,.1,.3], /* 7 */
+    [.9,.9,.9,.9,.1,.9,.9,.3,.6,.9,.1,.9,.9,.1,.9,.9,.9,.9], /* 8 */
+    [.9,.9,.9,.9,.1,.9,.9,.3,.9,.1,.1,.9,.9,.3,.9,.9,.9,.9]  /* 9 */
+  ];
+  /* 从 canvas 提取笔迹，归一化到 12x12，再压成 3x3 密度 */
+  function extract(){
+    var img=ctx.getImageData(0,0,cv.width,cv.height).data;
+    var xs=[],ys=[];
+    for(var y=0;y<cv.height;y+=2){for(var x=0;x<cv.width;x+=2){if(img[(y*cv.width+x)*4+3]>40){xs.push(x);ys.push(y);}}}
+    if(xs.length<5)return null;
+    var minX=Math.min.apply(null,xs),maxX=Math.max.apply(null,xs),minY=Math.min.apply(null,ys),maxY=Math.max.apply(null,ys);
+    var W=12,H=12,gx=Math.max(1,maxX-minX),gy=Math.max(1,maxY-minY);
+    var g=new Array(W*H).fill(0);
+    for(var i=0;i<xs.length;i++){var cx=Math.floor((xs[i]-minX)/gx*W);var cy=Math.floor((ys[i]-minY)/gy*H);if(cx>=W)cx=W-1;if(cy>=H)cy=H-1;g[cy*W+cx]=1;}
+    /* 压 3x3 */
+    var f=[0,0,0,0,0,0,0,0,0],tot=0;
+    for(var ry=0;ry<3;ry++)for(var rx=0;rx<3;rx++){var c=0;for(var yy=ry*4;yy<ry*4+4;yy++)for(var xx=rx*4;xx<rx*4+4;xx++)c+=g[yy*W+xx];f[ry*3+rx]=c/16;tot+=c;}
+    if(tot<3)return null;
+    return f;
+  }
+  function dist(a,b){var d=0;for(var i=0;i<9;i++){var t=a[i]-b[i];d+=t*t;}return d;}
+  /* 写完停顿 1.2 秒自动识别；也可点题目/输入框时触发 */
+  var timer=null;
+  function recognize(){
+    var f=extract();if(!f)return;
+    var best=0,bd=1e9;
+    for(var d=0;d<10;d++){var v=dist(f,TPL[d]);if(v<bd){bd=v;best=d;}}
+    var inp=document.getElementById('mathInput');
+    if(inp){inp.value=(inp.value||'')+best;inp.dispatchEvent(new Event('input'));}
+    clearPad();
+  }
+  /* v108：取消停笔自动识别，仅手动点"识别填入" */
+})();
+
   function learnSetExit(on){
     var bkL=document.getElementById('btnBackLearn'),lt=document.getElementById('learnTitle');
     if(!bkL)return;
@@ -6814,15 +6888,15 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     var fb=document.getElementById('lkFinishBtn');
     if(!word.lkCombo||!word.lkCombo.length){
       document.getElementById('lkBuilt').innerHTML='<span style="opacity:.6">从打散的音节块里按正确顺序连点，拼出单词</span>';
-      if(fb)fb.style.display='none';
+      if(fb){fb.disabled=true;fb.classList.add('off');}
       return;
     }
     var html=word.lkCombo.map(function(u){return '<span class="word-done">'+esc(u.txt)+'</span>'}).join('');
     html+='<span class="word-slot"></span>';
     document.getElementById('lkBuilt').innerHTML=html;
     if(fb){
-      if(word.lkStr&&isWordExact(word.lkStr)){fb.style.display='inline-block'}
-      else fb.style.display='none';
+      if(word.lkStr&&isWordExact(word.lkStr)){fb.disabled=false;fb.classList.remove('off');}
+      else{fb.disabled=true;fb.classList.add('off');}
     }
   }
   function clickLk(wn,i,b){
