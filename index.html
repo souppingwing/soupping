@@ -1,4 +1,4 @@
-<!-- 成长小星球 · 待办奖惩系统 · 版本 v113（改前备份于 _backup/） -->
+<!-- 成长小星球 · 待办奖惩系统 · 版本 v114（改前备份于 _backup/） -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -694,7 +694,7 @@ body{
   .m-tab.m-pet-tab.on svg{filter:drop-shadow(0 0 7px rgba(0,240,255,1))}
   @keyframes petSpin{to{transform:rotate(360deg)}}
   @keyframes petBreathe{0%,100%{box-shadow:0 0 10px rgba(0,240,255,.35),inset 0 0 12px rgba(0,240,255,.18)}50%{box-shadow:0 0 24px rgba(0,240,255,.7),inset 0 0 18px rgba(0,240,255,.32)}}
-  /* v41m12：独立 tab 页不再需要返回按钮；v113：标题统一居中、缩小、与下方模块留间距 */
+  /* v41m12：独立 tab 页不再需要返回按钮；v114：标题统一居中、缩小、与下方模块留间距 */
   .stats-head{position:relative;justify-content:center;text-align:center;min-height:44px}
   .stats-head .btn-add{display:none;position:absolute;left:0;top:50%;transform:translateY(-50%)}
   .stats-head h2{font-size:20px}
@@ -846,7 +846,7 @@ body::after{content:"";position:fixed;right:-70px;bottom:-55px;width:230px;heigh
 .item .sub{opacity:.78}
 .act-btn.e-edit{background:#DCEBFF;color:#1B63C9;box-shadow:0 3px 0 #B9D6F2}
 .act-btn.e-del{background:#FFE2DE;color:#C7433D;box-shadow:0 3px 0 #F2C0B8}
-/* v113：操作密码锁（仅 PC 端） */
+/* v114：操作密码锁（仅 PC 端） */
 .lock-cover{position:fixed;inset:0;z-index:99999;background:rgba(246,240,231,.97);display:flex;align-items:center;justify-content:center}
 .lock-card{background:#fff;border-radius:18px;padding:28px 32px;width:320px;max-width:88vw;box-shadow:0 10px 34px rgba(0,0,0,.14);text-align:center}
 .lock-ico{width:46px;height:46px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,#FFD6A5,#FFB4A2);display:flex;align-items:center;justify-content:center}
@@ -858,7 +858,7 @@ body::after{content:"";position:fixed;right:-70px;bottom:-55px;width:230px;heigh
 .lock-card .btn{margin-top:10px;width:100%}
 
 .btn.off{opacity:.45;filter:grayscale(.5);cursor:not-allowed}
-/* v104/v113：口算手写板 */
+/* v104/v114：口算手写板 */
 .pad-box{margin:12px 0 2px;border:1.5px dashed #C9B896;border-radius:12px;padding:8px;background:#FFFDF6}
 .pad-tip{font-size:12px;color:#9A8C7A;margin-bottom:6px;text-align:center}
 .pad-foot{display:flex;gap:10px;justify-content:center;margin-top:8px}
@@ -866,7 +866,7 @@ body::after{content:"";position:fixed;right:-70px;bottom:-55px;width:230px;heigh
 .pad-btn.primary{background:#5B8DEF;color:#fff;border-color:#5B8DEF}
 #padCanvas{width:100%;height:150px;background:#fff;border-radius:8px;touch-action:none;display:block;cursor:crosshair}
 .ans-box{display:flex;gap:16px;justify-content:center;align-items:center;margin:18px 0 2px}
-.ans-cell{width:68px;height:84px;border:3px solid var(--line);border-radius:16px;background:#FFFDF6;font-size:46px;font-weight:800;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:all .15s}
+.ans-cell{width:60px;height:80px;border:3px solid var(--line);border-radius:16px;background:#FFFDF6;font-size:46px;font-weight:800;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:all .15s}
 .ans-cell.on{border-color:var(--star);background:#FFF3D6;box-shadow:0 0 0 4px rgba(255,193,70,.22)}
 .num-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:330px;margin:14px auto 4px}
 .num-pad button{padding:14px 0;font-size:24px;font-weight:800;border-radius:14px;border:1.5px solid #C9B896;background:#fff;color:#5A6B8C;cursor:pointer}
@@ -1125,7 +1125,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     </button>
   </nav>
 
-  <!-- ===== v113：操作密码锁（仅 PC 端显示，打印清单不受限） ===== -->
+  <!-- ===== v114：操作密码锁（仅 PC 端显示，打印清单不受限） ===== -->
   <div class="lock-cover" id="lockCover" style="display:none">
     <div class="lock-card">
       <div class="lock-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
@@ -1368,6 +1368,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
       </div>
       <div class="math-q" id="mathQ"></div>
       <div class="ans-box">
+        <div class="ans-cell" id="ansHundreds"></div>
         <div class="ans-cell" id="ansTens"></div>
         <div class="ans-cell" id="ansOnes"></div>
       </div>
@@ -5926,7 +5927,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     syncUI();
     lockUI();pinUI();
     if(IS_REAL_MOBILE){
-      // v113：手机端只上传不下载——打开时不自动同步，需手动在设置中「从云端下载数据」
+      // v114：手机端只上传不下载——打开时不自动同步，需手动在设置中「从云端下载数据」
       return;
     }
     if(SYNC.mode==='gitee'){
@@ -6011,7 +6012,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     if(t)t.value='';if(r)r.value='';if(n)n.value='';
     syncUI();syncMsg('已清除同步配置',1);
   };
-  // ===== v113/v113：PC 端操作密码锁 =====
+  // ===== v114/v114：PC 端操作密码锁 =====
   var IS_REAL_MOBILE=/Android|iPhone|iPad|iPod|Windows Phone|HarmonyOS/i.test(navigator.userAgent||'');
   var PIN=localStorage.getItem('xp_star_pin')||'';
   function setPinMsg(t,ok){var el=document.getElementById('pinStatus');if(el){el.textContent=t;el.style.color=ok?'#3A9D52':'#D64541'}}
@@ -6137,9 +6138,9 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   function applyVer(){
     var m=window.innerWidth<=1024;
     var vt=document.getElementById('verTag');
-    if(vt)vt.textContent=m?'mobile v113 第1版':'v113';
+    if(vt)vt.textContent=m?'mobile v114 第1版':'v114';
     var sv=document.querySelector('.set-ver');
-    if(sv)sv.textContent=m?'成长小星球 mobile v113 第1版 · 数据保存在本机浏览器':'成长小星球 v113 · 数据保存在本机浏览器';
+    if(sv)sv.textContent=m?'成长小星球 mobile v114 第1版 · 数据保存在本机浏览器':'成长小星球 v114 · 数据保存在本机浏览器';
   }
   applyVer();
   function openRuleList(){
@@ -6178,7 +6179,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   document.getElementById('penCover').onclick=function(e){if(e.target===document.getElementById('penCover'))document.getElementById('penCover').classList.remove('show')};
   document.getElementById('bClose').onclick=function(){document.getElementById('bCover').classList.remove('show')};
   document.getElementById('bCover').onclick=function(e){if(e.target===document.getElementById('bCover'))document.getElementById('bCover').classList.remove('show')};
-  // ===== 学习系统（v113） =====
+  // ===== 学习系统（v114） =====
   var PY_BANK=[
     {w:'我',py:'wǒ',sm:'w',ym:'o'},{w:'你',py:'nǐ',sm:'n',ym:'i'},{w:'他',py:'tā',sm:'t',ym:'a'},
     {w:'大',py:'dà',sm:'d',ym:'a'},{w:'小',py:'xiǎo',sm:'x',ym:'iao'},{w:'山',py:'shān',sm:'sh',ym:'an'},
@@ -6288,41 +6289,46 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     document.getElementById('learnSubmit').style.display=isLast?'inline-block':'none';
   }
 
-/* v113：口算答案双格（十位/个位）+ 数字键盘 */
+/* v114：口算答案三格（百位/十位/个位）+ 数字键盘 */
 (function(){
+  function hun(){return document.getElementById('ansHundreds');}
   function tens(){return document.getElementById('ansTens');}
   function ones(){return document.getElementById('ansOnes');}
-  window._mathPos=0;
+  window._mathPos=1; /* 默认十位 */
   function setPos(p){
     window._mathPos=p;
-    tens().classList.toggle('on',p===0);
-    ones().classList.toggle('on',p===1);
+    hun().classList.toggle('on',p===0);
+    tens().classList.toggle('on',p===1);
+    ones().classList.toggle('on',p===2);
   }
   window._renderAnsCells=function(){
     var v=math.ans[math.cur];
-    tens().textContent=(v===undefined||v<10)?'':Math.floor(v/10);
+    hun().textContent=(v===undefined||v<100)?'':Math.floor(v/100);
+    tens().textContent=(v===undefined||v<10)?'':Math.floor(v/10)%10;
     ones().textContent=(v===undefined)?'':(v%10);
-    setPos(0);
+    setPos(1);
   };
   function commit(){
-    var t=tens().textContent.trim(),o=ones().textContent.trim();
+    var h=hun().textContent.trim(),t=tens().textContent.trim(),o=ones().textContent.trim();
     if(o===''){math.ans[math.cur]=undefined;return;}
-    math.ans[math.cur]=(t===''?0:parseInt(t,10))*10+parseInt(o,10);
+    math.ans[math.cur]=(h===''?0:parseInt(h,10))*100+(t===''?0:parseInt(t,10))*10+parseInt(o,10);
   }
-  tens().onclick=function(){setPos(0);};
-  ones().onclick=function(){setPos(1);};
+  function cells(){return [hun(),tens(),ones()];}
+  hun().onclick=function(){setPos(0);};
+  tens().onclick=function(){setPos(1);};
+  ones().onclick=function(){setPos(2);};
   document.querySelectorAll('.num-pad button').forEach(function(b){
     b.onclick=function(){
       var n=b.getAttribute('data-n');
-      var cell=window._mathPos===0?tens():ones();
+      var cell=cells()[window._mathPos];
       if(n==='back'){
         if(cell.textContent.trim()!=='')cell.textContent='';
-        else if(window._mathPos===1){setPos(0);tens().textContent='';}
+        else if(window._mathPos>0){setPos(window._mathPos-1);cells()[window._mathPos].textContent='';}
       }else if(n==='clear'){
-        tens().textContent='';ones().textContent='';setPos(0);
+        hun().textContent='';tens().textContent='';ones().textContent='';setPos(1);
       }else{
         cell.textContent=n;
-        if(window._mathPos===0)setPos(1);
+        if(window._mathPos<2)setPos(window._mathPos+1);
       }
       commit();
     };
@@ -6486,7 +6492,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     document.getElementById('mathNext').style.display=isLast?'none':'inline-block';
     document.getElementById('mathSubmit').style.display=isLast?'inline-block':'none';
   }
-  /* v113：全对烟花庆祝 */
+  /* v114：全对烟花庆祝 */
   function launchFireworks(){
     var old=document.getElementById('fwCanvas');if(old)old.remove();
     var c=document.createElement('canvas');c.id='fwCanvas';
@@ -6531,7 +6537,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     }
     frame();
   }
-  /* v113：拼音/单词 大爆炸型烟花——单发缓升、高空炸开成大圆球、火花缓落 */
+  /* v114：拼音/单词 大爆炸型烟花——单发缓升、高空炸开成大圆球、火花缓落 */
   function launchFireworksBig(){
     var old=document.getElementById('fwCanvas');if(old)old.remove();
     var c=document.createElement('canvas');c.id='fwCanvas';
@@ -6670,7 +6676,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     if(pv)pv.onclick=function(){if(math.cur>0){math.cur--;renderMath()}};
     var nx=document.getElementById('mathNext');
     if(nx)nx.onclick=function(){if(math.cur<math.qs.length-1){math.cur++;renderMath()}};
-    /* v113：答案由双格键盘写入，见 _renderAnsCells */
+    /* v114：答案由双格键盘写入，见 _renderAnsCells */
     var sb=document.getElementById('mathSubmit');
     if(sb)sb.onclick=submitMath;
     var ag=document.getElementById('mathAgain');
