@@ -1,4 +1,4 @@
-<!-- 成长小星球 · 待办奖惩系统 · 版本 v114（改前备份于 _backup/） -->
+<!-- 成长小星球 · 待办奖惩系统 · 版本 v115（改前备份于 _backup/） -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -694,7 +694,7 @@ body{
   .m-tab.m-pet-tab.on svg{filter:drop-shadow(0 0 7px rgba(0,240,255,1))}
   @keyframes petSpin{to{transform:rotate(360deg)}}
   @keyframes petBreathe{0%,100%{box-shadow:0 0 10px rgba(0,240,255,.35),inset 0 0 12px rgba(0,240,255,.18)}50%{box-shadow:0 0 24px rgba(0,240,255,.7),inset 0 0 18px rgba(0,240,255,.32)}}
-  /* v41m12：独立 tab 页不再需要返回按钮；v114：标题统一居中、缩小、与下方模块留间距 */
+  /* v41m12：独立 tab 页不再需要返回按钮；v115：标题统一居中、缩小、与下方模块留间距 */
   .stats-head{position:relative;justify-content:center;text-align:center;min-height:44px}
   .stats-head .btn-add{display:none;position:absolute;left:0;top:50%;transform:translateY(-50%)}
   .stats-head h2{font-size:20px}
@@ -846,7 +846,7 @@ body::after{content:"";position:fixed;right:-70px;bottom:-55px;width:230px;heigh
 .item .sub{opacity:.78}
 .act-btn.e-edit{background:#DCEBFF;color:#1B63C9;box-shadow:0 3px 0 #B9D6F2}
 .act-btn.e-del{background:#FFE2DE;color:#C7433D;box-shadow:0 3px 0 #F2C0B8}
-/* v114：操作密码锁（仅 PC 端） */
+/* v115：操作密码锁（仅 PC 端） */
 .lock-cover{position:fixed;inset:0;z-index:99999;background:rgba(246,240,231,.97);display:flex;align-items:center;justify-content:center}
 .lock-card{background:#fff;border-radius:18px;padding:28px 32px;width:320px;max-width:88vw;box-shadow:0 10px 34px rgba(0,0,0,.14);text-align:center}
 .lock-ico{width:46px;height:46px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,#FFD6A5,#FFB4A2);display:flex;align-items:center;justify-content:center}
@@ -858,7 +858,7 @@ body::after{content:"";position:fixed;right:-70px;bottom:-55px;width:230px;heigh
 .lock-card .btn{margin-top:10px;width:100%}
 
 .btn.off{opacity:.45;filter:grayscale(.5);cursor:not-allowed}
-/* v104/v114：口算手写板 */
+/* v104/v115：口算手写板 */
 .pad-box{margin:12px 0 2px;border:1.5px dashed #C9B896;border-radius:12px;padding:8px;background:#FFFDF6}
 .pad-tip{font-size:12px;color:#9A8C7A;margin-bottom:6px;text-align:center}
 .pad-foot{display:flex;gap:10px;justify-content:center;margin-top:8px}
@@ -1125,7 +1125,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     </button>
   </nav>
 
-  <!-- ===== v114：操作密码锁（仅 PC 端显示，打印清单不受限） ===== -->
+  <!-- ===== v115：操作密码锁（仅 PC 端显示，打印清单不受限） ===== -->
   <div class="lock-cover" id="lockCover" style="display:none">
     <div class="lock-card">
       <div class="lock-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
@@ -5927,7 +5927,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     syncUI();
     lockUI();pinUI();
     if(IS_REAL_MOBILE){
-      // v114：手机端只上传不下载——打开时不自动同步，需手动在设置中「从云端下载数据」
+      // v115：手机端只上传不下载——打开时不自动同步，需手动在设置中「从云端下载数据」
       return;
     }
     if(SYNC.mode==='gitee'){
@@ -6012,20 +6012,18 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     if(t)t.value='';if(r)r.value='';if(n)n.value='';
     syncUI();syncMsg('已清除同步配置',1);
   };
-  // ===== v114/v114：PC 端操作密码锁 =====
+  // ===== v115/v115：PC 端操作密码锁 =====
   var IS_REAL_MOBILE=/Android|iPhone|iPad|iPod|Windows Phone|HarmonyOS/i.test(navigator.userAgent||'');
   var PIN=localStorage.getItem('xp_star_pin')||'';
   function setPinMsg(t,ok){var el=document.getElementById('pinStatus');if(el){el.textContent=t;el.style.color=ok?'#3A9D52':'#D64541'}}
   function lockUI(){
     var lc=document.getElementById('lockCover');if(!lc)return;
-    var need=!IS_REAL_MOBILE&&PIN&&sessionStorage.getItem('xp_star_pin_unlocked')!=='1';
-    lc.style.display=need?'flex':'none';
-    if(!need){var m=document.getElementById('lockMsg');if(m)m.textContent=''}
+    /* v115：用户不再需要锁屏，永久关闭 */
+    lc.style.display='none';
+    var m=document.getElementById('lockMsg');if(m)m.textContent='';
   }
   function pinUI(){
-    var g=document.getElementById('pinGroup');if(g)g.style.display=IS_REAL_MOBILE?'none':'';
-    var st=document.getElementById('pinStatus');
-    if(st)st.textContent=PIN?('已设置操作密码'+(sessionStorage.getItem('xp_star_pin_unlocked')==='1'?'（已解锁）':'（已锁定）')):'未设置操作密码（设置后 PC 端需密码才能操作）';
+    var g=document.getElementById('pinGroup');if(g)g.style.display='none';
   }
   function pinTryUnlock(){
     var el=document.getElementById('lockPinInp'),m=document.getElementById('lockMsg');
@@ -6138,9 +6136,9 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   function applyVer(){
     var m=window.innerWidth<=1024;
     var vt=document.getElementById('verTag');
-    if(vt)vt.textContent=m?'mobile v114 第1版':'v114';
+    if(vt)vt.textContent=m?'mobile v115 第1版':'v115';
     var sv=document.querySelector('.set-ver');
-    if(sv)sv.textContent=m?'成长小星球 mobile v114 第1版 · 数据保存在本机浏览器':'成长小星球 v114 · 数据保存在本机浏览器';
+    if(sv)sv.textContent=m?'成长小星球 mobile v115 第1版 · 数据保存在本机浏览器':'成长小星球 v115 · 数据保存在本机浏览器';
   }
   applyVer();
   function openRuleList(){
@@ -6179,7 +6177,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   document.getElementById('penCover').onclick=function(e){if(e.target===document.getElementById('penCover'))document.getElementById('penCover').classList.remove('show')};
   document.getElementById('bClose').onclick=function(){document.getElementById('bCover').classList.remove('show')};
   document.getElementById('bCover').onclick=function(e){if(e.target===document.getElementById('bCover'))document.getElementById('bCover').classList.remove('show')};
-  // ===== 学习系统（v114） =====
+  // ===== 学习系统（v115） =====
   var PY_BANK=[
     {w:'我',py:'wǒ',sm:'w',ym:'o'},{w:'你',py:'nǐ',sm:'n',ym:'i'},{w:'他',py:'tā',sm:'t',ym:'a'},
     {w:'大',py:'dà',sm:'d',ym:'a'},{w:'小',py:'xiǎo',sm:'x',ym:'iao'},{w:'山',py:'shān',sm:'sh',ym:'an'},
@@ -6289,7 +6287,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     document.getElementById('learnSubmit').style.display=isLast?'inline-block':'none';
   }
 
-/* v114：口算答案三格（百位/十位/个位）+ 数字键盘 */
+/* v115：口算答案三格（百位/十位/个位）+ 数字键盘 */
 (function(){
   function hun(){return document.getElementById('ansHundreds');}
   function tens(){return document.getElementById('ansTens');}
@@ -6492,7 +6490,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     document.getElementById('mathNext').style.display=isLast?'none':'inline-block';
     document.getElementById('mathSubmit').style.display=isLast?'inline-block':'none';
   }
-  /* v114：全对烟花庆祝 */
+  /* v115：全对烟花庆祝 */
   function launchFireworks(){
     var old=document.getElementById('fwCanvas');if(old)old.remove();
     var c=document.createElement('canvas');c.id='fwCanvas';
@@ -6537,7 +6535,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     }
     frame();
   }
-  /* v114：拼音/单词 大爆炸型烟花——单发缓升、高空炸开成大圆球、火花缓落 */
+  /* v115：拼音/单词 大爆炸型烟花——单发缓升、高空炸开成大圆球、火花缓落 */
   function launchFireworksBig(){
     var old=document.getElementById('fwCanvas');if(old)old.remove();
     var c=document.createElement('canvas');c.id='fwCanvas';
@@ -6676,7 +6674,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     if(pv)pv.onclick=function(){if(math.cur>0){math.cur--;renderMath()}};
     var nx=document.getElementById('mathNext');
     if(nx)nx.onclick=function(){if(math.cur<math.qs.length-1){math.cur++;renderMath()}};
-    /* v114：答案由双格键盘写入，见 _renderAnsCells */
+    /* v115：答案由双格键盘写入，见 _renderAnsCells */
     var sb=document.getElementById('mathSubmit');
     if(sb)sb.onclick=submitMath;
     var ag=document.getElementById('mathAgain');
